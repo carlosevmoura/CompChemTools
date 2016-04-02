@@ -4,4 +4,4 @@ This project contains my personal Bash scripts to simplify computational chemist
 ## Installation 
 No special installation procedure is needed. Just copy the script file to a $PATH variable containing folder, like $HOME/bin.
 
-Enjoy!
+## Enjoy!
