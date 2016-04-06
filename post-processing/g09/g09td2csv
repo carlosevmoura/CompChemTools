@@ -39,7 +39,7 @@ echo "Transition Energy (eV),Oscillator Strength" > $FILENAME.td.csv
 paste -d "," .energy.temp .oos.temp >> $FILENAME.td.csv
 
 ## Removing temporary files
-rm -f .temp1 .temp2
+rm -f .energy.temp .oos.temp
 
 ## Finishing script
 echo -e "\033[01;32m$FILENAME.td.csv preview:\033[00m"
