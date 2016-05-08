@@ -10,20 +10,17 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     27817,        775]
-NotebookOptionsPosition[     25048,        674]
-NotebookOutlinePosition[     25405,        690]
-CellTagsIndexPosition[     25362,        687]
+NotebookDataLength[     16636,        599]
+NotebookOptionsPosition[     13955,        500]
+NotebookOutlinePosition[     14327,        517]
+CellTagsIndexPosition[     14284,        514]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["Plot Spectrum", "Title",
- CellChangeTimes->{{3.656542001578272*^9, 3.6565420508905067`*^9}, {
-  3.668434321059763*^9, 3.668434330571836*^9}, {3.671140943771564*^9, 
-  3.671140949411028*^9}, {3.67114177640757*^9, 3.671141778654161*^9}}],
+Cell["Plot Spectrum", "Title"],
 
 Cell[TextData[{
  "A ",
@@ -32,47 +29,24 @@ Cell[TextData[{
  " Notebook to easily plot a spectrum from CSV files containing transition \
 energies and intensities (oscillator strengths), typically results from \
 Time-Dependent Quantum Chemistry calculations."
-}], "Subtitle",
- CellChangeTimes->{{3.671141781491026*^9, 3.671141831373152*^9}, {
-  3.67114187240278*^9, 3.671141920736516*^9}}],
+}], "Subtitle"],
 
 Cell["\<\
 Author Carlos Eduardo Vieira de Moura (carlosevmoura@iq.ufrj.br)\
-\>", "Subsubtitle",
- CellChangeTimes->{{3.671141781491026*^9, 3.671141831373152*^9}, {
-  3.67114187240278*^9, 3.671141920736516*^9}, {3.671146449555689*^9, 
-  3.671146459767111*^9}}],
+\>", "Subsubtitle"],
 
 Cell[CellGroupData[{
 
-Cell["Definitions and Functions", "Chapter",
- CellChangeTimes->{{3.6565420545341873`*^9, 3.6565420882103767`*^9}, {
-  3.668435119142947*^9, 3.66843512125248*^9}}],
+Cell["Definitions and Functions", "Chapter"],
 
 Cell[CellGroupData[{
 
 Cell["Working directory definition (You should define this one!)", \
-"Subsection",
- CellChangeTimes->{{3.668435313915434*^9, 3.668435313988387*^9}, {
-  3.668435532860746*^9, 3.668435617228677*^9}, {3.6684369757103167`*^9, 
-  3.6684370981882*^9}, {3.668443156328603*^9, 3.668443156492673*^9}, {
-  3.671140960226609*^9, 3.6711409698986807`*^9}}],
-
-Cell[CellGroupData[{
+"Subsection"],
 
 Cell[BoxData[
  RowBox[{"SetDirectory", "[", 
-  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input"],
-
-Cell[BoxData["\<\"/Users/carlos/Documents/GitHub/CompChemTools/graphics\"\>"],\
- "Output",
- CellChangeTimes->{3.656947144081551*^9, 3.657877502938959*^9, 
-  3.6578776381387663`*^9, 3.661475643158287*^9, 3.661475911287465*^9, 
-  3.661476950318293*^9, 3.66219349730728*^9, 3.664719088916843*^9, 
-  3.667951605317081*^9, 3.6684341393671627`*^9, 3.668513198873973*^9, 
-  3.66855626772156*^9, 3.668806763328822*^9, 3.671140598929336*^9, 
-  3.6711421942288446`*^9, 3.671145435468507*^9, 3.671549444824493*^9}]
-}, Open  ]]
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -81,20 +55,13 @@ Cell[TextData[{
  StyleBox["DeleteHeader",
   FontWeight->"Bold"],
  ": Remove the reader from CSV file"
-}], "Subsection",
- CellChangeTimes->{{3.668435313915434*^9, 3.668435313988387*^9}, {
-  3.668435532860746*^9, 3.668435617228677*^9}, {3.6684369757103167`*^9, 
-  3.6684370653729553`*^9}, {3.668437466662318*^9, 3.668437466844901*^9}, {
-  3.668437679327004*^9, 3.668437740884914*^9}}],
+}], "Subsection"],
 
 Cell[BoxData[
  RowBox[{"DeleteHeader", ":=", 
   RowBox[{
    RowBox[{"Delete", "[", 
-    RowBox[{"#", ",", "1"}], "]"}], "&"}]}]], "Input",
- CellChangeTimes->{{3.656596585345154*^9, 3.656596586415951*^9}, {
-  3.6684349040453463`*^9, 3.6684349125568953`*^9}, {3.6684378379495487`*^9, 
-  3.668437841663288*^9}}]
+    RowBox[{"#", ",", "1"}], "]"}], "&"}]}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -106,19 +73,11 @@ Cell[TextData[{
  StyleBox["x",
   FontWeight->"Bold"],
  " variable in the plot"
-}], "Subsection",
- CellChangeTimes->{{3.668435313915434*^9, 3.668435313988387*^9}, {
-  3.668435532860746*^9, 3.668435617228677*^9}, {3.6684369757103167`*^9, 
-  3.6684370653729553`*^9}, {3.668437466662318*^9, 3.668437466844901*^9}, {
-  3.668437679327004*^9, 3.668437824948867*^9}, {3.668437861197029*^9, 
-  3.6684378752045937`*^9}}],
+}], "Subsection"],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"StDev", "=", "0.15"}], ";"}]], "Input",
- CellChangeTimes->{{3.668436582574954*^9, 3.668436596908844*^9}, {
-  3.668788440541383*^9, 3.668788440978642*^9}, {3.668788679475771*^9, 
-  3.6687886799621162`*^9}}]
+  RowBox[{"StDev", "=", "0.15"}], ";"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -133,11 +92,7 @@ Cell[TextData[{
  StyleBox["x",
   FontWeight->"Bold"],
  " variable in the plot"
-}], "Subsection",
- CellChangeTimes->{{3.668435313915434*^9, 3.668435313988387*^9}, {
-  3.668435532860746*^9, 3.668435617228677*^9}, {3.6684369757103167`*^9, 
-  3.6684370653729553`*^9}, {3.668437466662318*^9, 3.668437466844901*^9}, {
-  3.668437679327004*^9, 3.668437824948867*^9}}],
+}], "Subsection"],
 
 Cell[BoxData[{
  RowBox[{"XMinGen", ":=", 
@@ -157,10 +112,7 @@ Cell[BoxData[{
       RowBox[{"#", "[", 
        RowBox[{"[", 
         RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}], "+", "1"}], "]"}], 
-   "&"}]}]}], "Input",
- CellChangeTimes->{{3.668436512233693*^9, 3.6684365599971848`*^9}, {
-  3.668442558141541*^9, 3.668442559485241*^9}, {3.668443926879592*^9, 
-  3.66844395239736*^9}}]
+   "&"}]}]}], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -171,11 +123,7 @@ Cell[TextData[{
  ": Generate an Gaussian Distribution upon a given transition\n\t#1: \
 Amplitude (Oscillator Strength)\n\t#2: Transition Energy\n\t#3: Standard \
 Deviation (StDev variable)\n\t#4: Dimension (Recommended: x)"
-}], "Subsection",
- CellChangeTimes->{{3.668437156288492*^9, 3.668437233804593*^9}, {
-   3.668437273974105*^9, 3.6684373769969473`*^9}, {3.66843740730107*^9, 
-   3.6684374804046373`*^9}, 3.668437547200509*^9, {3.6684379899073353`*^9, 
-   3.668437990486375*^9}, 3.668438036904232*^9}],
+}], "Subsection"],
 
 Cell[BoxData[
  RowBox[{"PeakGen", ":=", 
@@ -188,16 +136,7 @@ Cell[BoxData[
     RowBox[{"(", 
      RowBox[{"#3", "*", 
       SqrtBox[
-       RowBox[{"2", "\[Pi]"}]]}], ")"}]}], "&"}]}]], "Input",
- CellChangeTimes->{{3.656529962432249*^9, 3.656529970298818*^9}, {
-   3.6565311535834627`*^9, 3.65653118787201*^9}, {3.6565312397358093`*^9, 
-   3.656531243021861*^9}, {3.6565313034534616`*^9, 3.656531378706828*^9}, 
-   3.656531642970731*^9, {3.6565407442145977`*^9, 3.6565407449486*^9}, {
-   3.6565418729556093`*^9, 3.6565418804511747`*^9}, {3.6684348956218233`*^9, 
-   3.668434898644998*^9}, {3.668438739405551*^9, 3.668438745063192*^9}, {
-   3.668446628478446*^9, 3.668446635365275*^9}, {3.6684466987182703`*^9, 
-   3.668446707085305*^9}, {3.668446737254443*^9, 3.6684467377250032`*^9}, 
-   3.6715494248868847`*^9}]
+       RowBox[{"2", "\[Pi]"}]]}], ")"}]}], "&"}]}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -207,10 +146,7 @@ Cell[TextData[{
   FontWeight->"Bold"],
  ": \n\t#1: Dimension (Recommended: x)\n\t#2: Variable containing data from \
 CSV file\n\t#3: Standard Deviation (StDev variable)"
-}], "Subsection",
- CellChangeTimes->{{3.668435313915434*^9, 3.668435313988387*^9}, {
-  3.668435532860746*^9, 3.668435617228677*^9}, {3.6684369757103167`*^9, 
-  3.6684370653729553`*^9}, {3.668437466662318*^9, 3.668437466844901*^9}}],
+}], "Subsection"],
 
 Cell[BoxData[
  RowBox[{"TotalPeaksGen", ":=", "\[IndentingNewLine]", 
@@ -230,12 +166,7 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{"i", ",", 
         RowBox[{"Length", "[", "#2", "]"}]}], "}"}]}], "\[IndentingNewLine]", 
-     "]"}], "\[IndentingNewLine]", "]"}], "&"}]}]], "Input",
- CellChangeTimes->{{3.668436660056143*^9, 3.6684367097972097`*^9}, {
-   3.668436753229228*^9, 3.668436754229288*^9}, {3.668436934861549*^9, 
-   3.668436948221348*^9}, {3.6684370701106033`*^9, 3.668437070389167*^9}, {
-   3.6684376046806498`*^9, 3.668437660885251*^9}, 3.66843846942288*^9, {
-   3.668438661749511*^9, 3.66843871597327*^9}}]
+     "]"}], "\[IndentingNewLine]", "]"}], "&"}]}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -246,13 +177,7 @@ Cell[TextData[{
  ": \n\t#1: Variable containing data from CSV file\n\t#2: Standard Deviation \
 (StDev variable)\n\t#3: Minimum value for x axis in the plot\n\t#4: Maximum \
 value for x axis in the plot\n\t#5: Line color\n\t#6: Legends"
-}], "Subsection",
- CellChangeTimes->{{3.668435313915434*^9, 3.668435313988387*^9}, {
-   3.668435532860746*^9, 3.668435617228677*^9}, {3.6684369757103167`*^9, 
-   3.6684370653729553`*^9}, {3.668437466662318*^9, 3.668437466844901*^9}, {
-   3.6684383726531477`*^9, 3.668438382724547*^9}, {3.668438523216749*^9, 
-   3.6684385612445383`*^9}, 3.668440858641037*^9, {3.66844113855022*^9, 
-   3.668441168036646*^9}, {3.671145319267084*^9, 3.6711454126126137`*^9}}],
+}], "Subsection"],
 
 Cell[BoxData[
  RowBox[{"PlotTotalPeaks", ":=", "\[IndentingNewLine]", 
@@ -291,21 +216,7 @@ Cell[BoxData[
      "\[IndentingNewLine]", 
      RowBox[{"ImageSize", "\[Rule]", "500"}], ",", "\[IndentingNewLine]", 
      RowBox[{"PlotLegends", "\[Rule]", 
-      RowBox[{"{", "#6", "}"}]}]}], "]"}], "&"}]}]], "Input",
- CellChangeTimes->{{3.6684383311585207`*^9, 3.668438407269973*^9}, {
-   3.66843856447202*^9, 3.668438564671612*^9}, {3.668438616582568*^9, 
-   3.668438652822198*^9}, {3.66843872767043*^9, 3.668438728358687*^9}, {
-   3.668440778471424*^9, 3.668440778998239*^9}, {3.668440814745514*^9, 
-   3.6684408365826073`*^9}, {3.668440874904097*^9, 3.668440893918572*^9}, {
-   3.668441104504631*^9, 3.66844110493118*^9}, {3.668441135624713*^9, 
-   3.668441135814374*^9}, {3.668441230783523*^9, 3.6684412337912483`*^9}, {
-   3.668441369464301*^9, 3.6684413723761044`*^9}, {3.668441410384138*^9, 
-   3.66844143915831*^9}, {3.668441657680047*^9, 3.668441691254402*^9}, {
-   3.6684440574649773`*^9, 3.6684440616226597`*^9}, 3.668444098249711*^9, {
-   3.6684441480633163`*^9, 3.66844416204748*^9}, {3.671145325099571*^9, 
-   3.671145331781505*^9}, {3.67114541797313*^9, 3.6711454231491127`*^9}, {
-   3.671552083509173*^9, 3.671552143194625*^9}, {3.67155225927221*^9, 
-   3.671552285457308*^9}}]
+      RowBox[{"{", "#6", "}"}]}]}], "]"}], "&"}]}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -314,14 +225,7 @@ Cell[TextData[{
  StyleBox["ListPlotPeaks",
   FontWeight->"Bold"],
  ": \n\t#1: Variable containing data from CSV file\n\t#2: Line color"
-}], "Subsection",
- CellChangeTimes->{{3.668435313915434*^9, 3.668435313988387*^9}, {
-   3.668435532860746*^9, 3.668435617228677*^9}, {3.6684369757103167`*^9, 
-   3.6684370653729553`*^9}, {3.668437466662318*^9, 3.668437466844901*^9}, {
-   3.6684383726531477`*^9, 3.668438382724547*^9}, {3.668438523216749*^9, 
-   3.6684385612445383`*^9}, 3.668440858641037*^9, {3.66844113855022*^9, 
-   3.668441168036646*^9}, {3.668444496605073*^9, 3.6684445328042707`*^9}, {
-   3.6684445822129803`*^9, 3.668444585612976*^9}}],
+}], "Subsection"],
 
 Cell[BoxData[
  RowBox[{"ListPlotPeaks", ":=", "\[IndentingNewLine]", 
@@ -334,9 +238,7 @@ Cell[BoxData[
        RowBox[{
         RowBox[{"PointSize", "[", "Medium", "]"}], ",", "#2"}], "]"}]}], ",", 
      "\[IndentingNewLine]", 
-     RowBox[{"ImageSize", "\[Rule]", "500"}]}], "]"}], "&"}]}]], "Input",
- CellChangeTimes->{{3.668444542445706*^9, 3.668444594245831*^9}, {
-  3.668446567450685*^9, 3.668446587493836*^9}}]
+     RowBox[{"ImageSize", "\[Rule]", "500"}]}], "]"}], "&"}]}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -347,14 +249,7 @@ Cell[TextData[{
  ": \n\t#1: Variable containing data from CSV file\n\t#2: Standard Deviation \
 (StDev variable)\n\t#3: Minimum value for x axis in the plot\n\t#4: Maximum \
 value for x axis in the plot\n\t#5: Line color\n\t#6: Legends"
-}], "Subsection",
- CellChangeTimes->{{3.668435313915434*^9, 3.668435313988387*^9}, {
-   3.668435532860746*^9, 3.668435617228677*^9}, {3.6684369757103167`*^9, 
-   3.6684370653729553`*^9}, {3.668437466662318*^9, 3.668437466844901*^9}, {
-   3.6684383726531477`*^9, 3.668438382724547*^9}, {3.668438523216749*^9, 
-   3.6684385612445383`*^9}, 3.668440858641037*^9, {3.66844113855022*^9, 
-   3.668441168036646*^9}, {3.671145319267084*^9, 3.6711454126126137`*^9}, {
-   3.671661050309512*^9, 3.67166105476381*^9}}],
+}], "Subsection"],
 
 Cell[BoxData[
  RowBox[{"ManipulateSpectrum", ":=", 
@@ -394,9 +289,7 @@ Cell[BoxData[
        RowBox[{"{", 
         RowBox[{"StDevTest", ",", "0.2"}], "}"}], ",", "0.1", ",", "0.5", ",", 
        RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}]}], "]"}],
-    "&"}]}]], "Input",
- CellChangeTimes->{{3.671661057195731*^9, 3.671661140279598*^9}, {
-  3.671661173096821*^9, 3.6716611899423532`*^9}}]
+    "&"}]}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -407,9 +300,7 @@ Cell[TextData[{
  StyleBox["Mathematica",
   FontWeight->"Bold",
   FontSlant->"Italic"]
-}], "Subsection",
- CellChangeTimes->{{3.668557226891828*^9, 3.668557246389447*^9}, {
-  3.668557922400278*^9, 3.6685579385358267`*^9}}],
+}], "Subsection"],
 
 Cell[BoxData[{
  RowBox[{
@@ -466,19 +357,13 @@ Cell[BoxData[{
    RowBox[{"{", 
     RowBox[{
     "blue", ",", "green", ",", "yellow", ",", "Orange", ",", "red", ",", 
-     "brown", ",", "purple", ",", "grey"}], "}"}]}], ";"}]}], "Input",
- CellChangeTimes->{{3.668557839450255*^9, 3.668557849840877*^9}, {
-  3.6685578907698298`*^9, 3.6685579200807447`*^9}, {3.66855795314566*^9, 
-  3.668557953984653*^9}, {3.6685580316659403`*^9, 3.6685580524399977`*^9}, {
-  3.6711409973160133`*^9, 3.671141005508772*^9}, {3.671146361771638*^9, 
-  3.671146365243435*^9}}]
+     "brown", ",", "purple", ",", "grey"}], "}"}]}], ";"}]}], "Input"]
 }, Open  ]]
 }, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["How to use this notebook?", "Chapter",
- CellChangeTimes->{{3.671142248524248*^9, 3.671142258479054*^9}}],
+Cell["How to use this notebook?", "Chapter"],
 
 Cell[TextData[{
  "1) Evaluate all cells contained in ",
@@ -486,9 +371,7 @@ Cell[TextData[{
   FontWeight->"Bold"],
  " Chapter\n\t- You can also copy this functions to other working notebook, \
 as you prefer;\n\t- Modifications can be made, according to your needs;"
-}], "Subtitle",
- CellChangeTimes->{{3.671142277415469*^9, 3.671142365926931*^9}, {
-  3.671142462951737*^9, 3.67114259038842*^9}}],
+}], "Subtitle"],
 
 Cell[TextData[{
  "2) Import and save your data in a variable;\n\t- Use ",
@@ -498,10 +381,7 @@ Cell[TextData[{
  StyleBox["DeleteHeader",
   FontWeight->"Bold"],
  ";"
-}], "Subtitle",
- CellChangeTimes->{{3.671142277415469*^9, 3.671142365926931*^9}, {
-  3.671142462951737*^9, 3.671142612556217*^9}, {3.6711426585620813`*^9, 
-  3.671142700217916*^9}}],
+}], "Subtitle"],
 
 Cell[TextData[{
  "3) Apply ",
@@ -515,20 +395,12 @@ Use ",
  StyleBox["Show",
   FontWeight->"Bold"],
  " function to show both plots together;"
-}], "Subtitle",
- CellChangeTimes->{{3.671142277415469*^9, 3.671142365926931*^9}, {
-  3.671142462951737*^9, 3.671142612556217*^9}, {3.6711426585620813`*^9, 
-  3.671142700217916*^9}, {3.671142769270191*^9, 3.671142834047545*^9}, {
-  3.6711428925240803`*^9, 3.671142892651864*^9}, {3.671142938029974*^9, 
-  3.671142970973815*^9}}]
+}], "Subtitle"]
 }, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["Usage Example", "Chapter",
- CellChangeTimes->{{3.668556505456242*^9, 3.668556510105195*^9}, {
-  3.671141016171679*^9, 3.671141018073174*^9}, {3.671142631013206*^9, 
-  3.671142634157043*^9}}],
+Cell["Usage Example", "Chapter"],
 
 Cell[CellGroupData[{
 
@@ -540,21 +412,13 @@ Cell[TextData[{
   FormBox[
    RowBox[{
     SubscriptBox["C", "4"], 
-    SubscriptBox["H", "4"], "S"}], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+    SubscriptBox["H", "4"], "S"}], TraditionalForm]]],
  " at TD-B3LYP level with 6-31+G* basis set"
-}], "Subchapter",
- CellChangeTimes->{{3.668435313915434*^9, 3.668435313988387*^9}, {
-  3.668435532860746*^9, 3.668435617228677*^9}, {3.668440716453195*^9, 
-  3.668440717140811*^9}, {3.668516686006105*^9, 3.668516686085887*^9}, {
-  3.668788165948607*^9, 3.668788173499071*^9}, {3.671145823283938*^9, 
-  3.671145942040979*^9}}],
+}], "Subchapter"],
 
 Cell[CellGroupData[{
 
-Cell["Importing data", "Subsection",
- CellChangeTimes->{{3.67114601534766*^9, 3.671146111872304*^9}, {
-  3.6711461714005213`*^9, 3.671146173838745*^9}}],
+Cell["Importing data", "Subsection"],
 
 Cell[BoxData[
  RowBox[{"thiopheneData", "=", 
@@ -562,18 +426,7 @@ Cell[BoxData[
    RowBox[{"Import", "[", 
     RowBox[{
     "\"\<auxiliary files/thiophene-tddft.csv\>\"", ",", "\"\<CSV\>\""}], 
-    "]"}], "//", "DeleteHeader"}]}]], "Input",
- CellChangeTimes->{{3.6565424147622957`*^9, 3.6565424309985847`*^9}, {
-   3.656542551319688*^9, 3.656542553270587*^9}, {3.656544205470933*^9, 
-   3.6565442065542*^9}, 3.656947126469337*^9, {3.6569502197148533`*^9, 
-   3.656950227032634*^9}, {3.657877496498974*^9, 3.657877497007407*^9}, {
-   3.657888930394205*^9, 3.657888959167768*^9}, {3.6578899218010178`*^9, 
-   3.657889932703319*^9}, {3.661475770533394*^9, 3.661475803474455*^9}, {
-   3.6614759739529943`*^9, 3.6614759766995077`*^9}, 3.664719097656788*^9, {
-   3.668434856691575*^9, 3.6684349351810513`*^9}, 3.668435163493792*^9, {
-   3.6684433243021793`*^9, 3.668443338088378*^9}, {3.668516683352207*^9, 
-   3.6685166901580067`*^9}, {3.668556365938036*^9, 3.6685563673991213`*^9}, {
-   3.6711449292914343`*^9, 3.671144966800858*^9}}]
+    "]"}], "//", "DeleteHeader"}]}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -581,9 +434,7 @@ Cell[CellGroupData[{
 Cell["\<\
 Plotting spectrum using XMinGen and XMaxGen to obtain automatically plot \
 borders\
-\>", "Subsection",
- CellChangeTimes->{{3.67114601534766*^9, 3.671146111872304*^9}, {
-  3.671146180944496*^9, 3.671146224290663*^9}}],
+\>", "Subsection"],
 
 Cell[BoxData[
  RowBox[{"PlotTotalPeaks", "[", 
@@ -592,15 +443,7 @@ Cell[BoxData[
    RowBox[{"XMaxGen", "[", "thiopheneData", "]"}], ",", 
    RowBox[{"apple8", "[", 
     RowBox[{"[", "1", "]"}], "]"}], ",", 
-   "\"\<Thiophene (B3LYP/6-31+G*)\>\""}], "]"}]], "Input",
- CellChangeTimes->{{3.668440731576604*^9, 3.668440782468851*^9}, {
-   3.6684410378397083`*^9, 3.6684410433810673`*^9}, {3.668441185925742*^9, 
-   3.668441186720611*^9}, {3.6684416945338163`*^9, 3.668441740524825*^9}, {
-   3.668442071783511*^9, 3.668442075868916*^9}, 3.668444673629915*^9, {
-   3.668516693909905*^9, 3.6685167518344088`*^9}, {3.668788880291544*^9, 
-   3.668788883505928*^9}, {3.668809964634568*^9, 3.668809970314403*^9}, {
-   3.671144975522893*^9, 3.6711450289417458`*^9}, {3.671145269204081*^9, 
-   3.671145282553483*^9}, {3.67114566050736*^9, 3.671145662985066*^9}}]
+   "\"\<Thiophene (B3LYP/6-31+G*)\>\""}], "]"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -608,20 +451,15 @@ Cell[CellGroupData[{
 Cell["\<\
 Use ManipulateSpectrum to choose best values for standard deviation and also \
 minimum and maximum for x axis\
-\>", "Subsection",
- CellChangeTimes->{{3.67114601534766*^9, 3.671146111872304*^9}, 
-   3.671146229066524*^9, {3.671551377531454*^9, 3.67155143112827*^9}}],
+\>", "Subsection"],
 
 Cell[BoxData[
- RowBox[{"ManipulateSpectrum", "[", "thiopheneData", "]"}]], "Input",
- CellChangeTimes->{{3.6716612000145683`*^9, 3.671661210031411*^9}}]
+ RowBox[{"ManipulateSpectrum", "[", "thiopheneData", "]"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["You can also apply PlotTotalPeaks setting values manually", "Subsection",
- CellChangeTimes->{{3.67114601534766*^9, 3.671146111872304*^9}, 
-   3.671146229066524*^9, {3.671551410592119*^9, 3.671551440124413*^9}}],
+Cell["You can also apply PlotTotalPeaks setting values manually", "Subsection"],
 
 Cell[BoxData[
  RowBox[{"thiophenePlot", "=", 
@@ -629,51 +467,40 @@ Cell[BoxData[
    RowBox[{"thiopheneData", ",", "0.08", ",", "5.0", ",", "9.0", ",", 
     RowBox[{"apple8", "[", 
      RowBox[{"[", "1", "]"}], "]"}], ",", 
-    "\"\<Thiophene (B3LYP/6-31+G*)\>\""}], "]"}]}]], "Input",
- CellChangeTimes->{{3.671145473756796*^9, 3.671145506711651*^9}}]
+    "\"\<Thiophene (B3LYP/6-31+G*)\>\""}], "]"}]}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["\<\
 Plotting peaks for a clear visualization of computational chemistry results\
-\>", "Subsection",
- CellChangeTimes->{{3.67114601534766*^9, 3.671146111872304*^9}, {
-  3.671146229066524*^9, 3.671146263105744*^9}}],
+\>", "Subsection"],
 
 Cell[BoxData[
  RowBox[{"thiophenePeaks", "=", 
   RowBox[{"ListPlotPeaks", "[", 
    RowBox[{"thiopheneData", ",", 
     RowBox[{"apple8", "[", 
-     RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}]], "Input",
- CellChangeTimes->{{3.668444602976489*^9, 3.668444659197112*^9}, {
-   3.668516718821666*^9, 3.668516729420143*^9}, 3.668788891180254*^9, {
-   3.671145540842328*^9, 3.671145559811337*^9}}]
+     RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Showing both plots in one graphic", "Subsection",
- CellChangeTimes->{{3.67114601534766*^9, 3.671146111872304*^9}, 
-   3.671146229066524*^9, {3.671146276403077*^9, 3.671146289233305*^9}}],
+Cell["Showing both plots in one graphic", "Subsection"],
 
 Cell[BoxData[
  RowBox[{"Show", "[", 
-  RowBox[{"thiophenePlot", ",", "thiophenePeaks"}], "]"}]], "Input",
- CellChangeTimes->{{3.6684446800623913`*^9, 3.668444687656404*^9}, {
-  3.668516736571164*^9, 3.668516738340365*^9}, {3.6711455706120157`*^9, 
-  3.671145576507883*^9}}]
+  RowBox[{"thiophenePlot", ",", "thiophenePeaks"}], "]"}]], "Input"]
 }, Open  ]]
 }, Open  ]]
 }, Closed]]
 }, Open  ]],
 
-Cell["Enjoy!", "Title",
- CellChangeTimes->{{3.671146380926044*^9, 3.671146391030005*^9}}]
+Cell["Enjoy!", "Title"]
 },
 WindowSize->{1440, 851},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Visible->True,
 FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 25, \
 2016)",
 StyleDefinitions->"Default.nb"
@@ -690,93 +517,90 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 241, 3, 92, "Title"],
-Cell[824, 27, 400, 9, 81, "Subtitle"],
-Cell[1227, 38, 258, 5, 29, "Subsubtitle"],
+Cell[580, 22, 30, 0, 92, "Title"],
+Cell[613, 24, 286, 7, 81, "Subtitle"],
+Cell[902, 33, 95, 2, 29, "Subsubtitle"],
 Cell[CellGroupData[{
-Cell[1510, 47, 162, 2, 65, "Chapter"],
+Cell[1022, 39, 44, 0, 65, "Chapter"],
 Cell[CellGroupData[{
-Cell[1697, 53, 343, 5, 44, "Subsection"],
-Cell[CellGroupData[{
-Cell[2065, 62, 104, 2, 28, "Input"],
-Cell[2172, 66, 503, 7, 28, "Output"]
-}, Open  ]]
+Cell[1091, 43, 82, 1, 44, "Subsection"],
+Cell[1176, 46, 104, 2, 28, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2724, 79, 382, 8, 44, "Subsection"],
-Cell[3109, 89, 308, 7, 28, "Input"]
+Cell[1317, 53, 119, 4, 44, "Subsection"],
+Cell[1439, 59, 138, 4, 28, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3454, 101, 491, 12, 44, "Subsection"],
-Cell[3948, 115, 240, 5, 28, "Input"]
+Cell[1614, 68, 177, 7, 44, "Subsection"],
+Cell[1794, 77, 74, 2, 28, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4225, 125, 488, 14, 44, "Subsection"],
-Cell[4716, 141, 690, 21, 46, "Input"]
+Cell[1905, 84, 225, 10, 44, "Subsection"],
+Cell[2133, 96, 525, 18, 46, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5443, 167, 550, 10, 144, "Subsection"],
-Cell[5996, 179, 961, 20, 40, "Input"]
+Cell[2695, 119, 285, 6, 144, "Subsection"],
+Cell[2983, 127, 342, 11, 40, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6994, 204, 428, 8, 119, "Subsection"],
-Cell[7425, 214, 1038, 23, 131, "Input"]
+Cell[3362, 143, 214, 5, 119, "Subsection"],
+Cell[3579, 150, 700, 18, 131, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8500, 242, 743, 12, 194, "Subsection"],
-Cell[9246, 256, 2502, 51, 165, "Input"]
+Cell[4316, 173, 304, 6, 194, "Subsection"],
+Cell[4623, 181, 1525, 37, 165, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[11785, 312, 644, 11, 94, "Subsection"],
-Cell[12432, 325, 609, 13, 97, "Input"]
+Cell[6185, 223, 153, 4, 94, "Subsection"],
+Cell[6341, 229, 494, 11, 97, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[13078, 343, 796, 13, 194, "Subsection"],
-Cell[13877, 358, 1553, 40, 80, "Input"]
+Cell[6872, 245, 308, 6, 194, "Subsection"],
+Cell[7183, 253, 1436, 38, 80, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[15467, 403, 282, 8, 44, "Subsection"],
-Cell[15752, 413, 2107, 60, 148, "Input"]
+Cell[8656, 296, 165, 6, 44, "Subsection"],
+Cell[8824, 304, 1790, 55, 148, "Input"]
 }, Open  ]]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[17908, 479, 110, 1, 54, "Chapter"],
-Cell[18021, 482, 397, 8, 111, "Subtitle"],
-Cell[18421, 492, 381, 11, 81, "Subtitle"],
-Cell[18805, 505, 636, 17, 111, "Subtitle"]
+Cell[10663, 365, 44, 0, 54, "Chapter"],
+Cell[10710, 367, 283, 6, 111, "Subtitle"],
+Cell[10996, 375, 215, 8, 81, "Subtitle"],
+Cell[11214, 385, 324, 12, 111, "Subtitle"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[19478, 527, 196, 3, 54, "Chapter"],
+Cell[11575, 402, 32, 0, 54, "Chapter"],
 Cell[CellGroupData[{
-Cell[19699, 534, 610, 16, 63, "Subchapter"],
+Cell[11632, 406, 269, 10, 63, "Subchapter"],
 Cell[CellGroupData[{
-Cell[20334, 554, 152, 2, 44, "Subsection"],
-Cell[20489, 558, 1007, 17, 28, "Input"]
+Cell[11926, 420, 36, 0, 44, "Subsection"],
+Cell[11965, 422, 217, 6, 28, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[21533, 580, 226, 5, 44, "Subsection"],
-Cell[21762, 587, 920, 15, 28, "Input"]
+Cell[12219, 433, 112, 3, 44, "Subsection"],
+Cell[12334, 438, 335, 7, 28, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[22719, 607, 275, 5, 44, "Subsection"],
-Cell[22997, 614, 151, 2, 28, "Input"]
+Cell[12706, 450, 139, 3, 44, "Subsection"],
+Cell[12848, 455, 83, 1, 28, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[23185, 621, 216, 2, 44, "Subsection"],
-Cell[23404, 625, 349, 7, 28, "Input"]
+Cell[12968, 461, 79, 0, 44, "Subsection"],
+Cell[13050, 463, 283, 6, 28, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[23790, 637, 219, 4, 44, "Subsection"],
-Cell[24012, 643, 387, 8, 28, "Input"]
+Cell[13370, 474, 105, 2, 44, "Subsection"],
+Cell[13478, 478, 199, 5, 28, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[24436, 656, 192, 2, 44, "Subsection"],
-Cell[24631, 660, 273, 5, 28, "Input"]
+Cell[13714, 488, 55, 0, 44, "Subsection"],
+Cell[13772, 490, 105, 2, 28, "Input"]
 }, Open  ]]
 }, Open  ]]
 }, Closed]]
 }, Open  ]],
-Cell[24955, 671, 89, 1, 92, "Title"]
+Cell[13928, 498, 23, 0, 92, "Title"]
 }
 ]
 *)
