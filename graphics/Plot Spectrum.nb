@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     16636,        599]
-NotebookOptionsPosition[     13955,        500]
-NotebookOutlinePosition[     14327,        517]
-CellTagsIndexPosition[     14284,        514]
+NotebookDataLength[     18541,        640]
+NotebookOptionsPosition[     15821,        540]
+NotebookOutlinePosition[     16190,        557]
+CellTagsIndexPosition[     16147,        554]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -187,10 +187,8 @@ Cell[BoxData[
      RowBox[{"TotalPeaksGen", "[", 
       RowBox[{"x", ",", "#1", ",", "#2"}], "]"}], ",", 
      RowBox[{"{", 
-      RowBox[{"x", ",", 
-       RowBox[{"XMinGen", "[", "#1", "]"}], ",", 
-       RowBox[{"XMaxGen", "[", "#1", "]"}]}], "}"}], ",", 
-     "\[IndentingNewLine]", 
+      RowBox[{"x", ",", "#3", ",", "#4"}], "}"}], ",", "\[IndentingNewLine]", 
+     
      RowBox[{"PlotRange", "\[Rule]", 
       RowBox[{"{", 
        RowBox[{
@@ -302,62 +300,104 @@ Cell[TextData[{
   FontSlant->"Italic"]
 }], "Subsection"],
 
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"blue", "=", 
-   RowBox[{"RGBColor", "[", 
-    RowBox[{
-     RowBox[{"17.6", "/", "100"}], ",", 
-     RowBox[{"41.6", "/", "100"}], ",", 
-     RowBox[{"63.1", "/", "100"}]}], "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"green", "=", 
-   RowBox[{"RGBColor", "[", 
-    RowBox[{
-     RowBox[{"34.9", "/", "100"}], ",", 
-     RowBox[{"66.7", "/", "100"}], ",", 
-     RowBox[{"33.3", "/", "100"}]}], "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"yellow", "=", 
-   RowBox[{"RGBColor", "[", 
-    RowBox[{
-     RowBox[{"96.9", "/", "100"}], ",", 
-     RowBox[{"68.6", "/", "100"}], ",", 
-     RowBox[{"20.8", "/", "100"}]}], "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"red", "=", 
-   RowBox[{"RGBColor", "[", 
-    RowBox[{
-     RowBox[{"86.3", "/", "100"}], ",", 
-     RowBox[{"13.3", "/", "100"}], ",", 
-     RowBox[{"19.6", "/", "100"}]}], "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"brown", "=", 
-   RowBox[{"RGBColor", "[", 
-    RowBox[{
-     RowBox[{"58.4", "/", "100"}], ",", 
-     RowBox[{"38.8", "/", "100"}], ",", 
-     RowBox[{"23.9", "/", "100"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"purple", "=", 
-   RowBox[{"RGBColor", "[", 
-    RowBox[{
-     RowBox[{"55.3", "/", "100"}], ",", 
-     RowBox[{"27.5", "/", "100"}], ",", 
-     RowBox[{"55.7", "/", "100"}]}], "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"grey", "=", 
-   RowBox[{"RGBColor", "[", 
-    RowBox[{
-     RowBox[{"55.7", "/", "100"}], ",", 
-     RowBox[{"57.3", "/", "100"}], ",", 
-     RowBox[{"56.9", "/", "100"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+Cell[BoxData[
  RowBox[{
   RowBox[{"apple8", "=", 
-   RowBox[{"{", 
+   RowBox[{"{", "\[IndentingNewLine]", 
     RowBox[{
-    "blue", ",", "green", ",", "yellow", ",", "Orange", ",", "red", ",", 
-     "brown", ",", "purple", ",", "grey"}], "}"}]}], ";"}]}], "Input"]
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"17.6", "/", "100"}], ",", 
+       RowBox[{"41.6", "/", "100"}], ",", 
+       RowBox[{"63.1", "/", "100"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"34.9", "/", "100"}], ",", 
+       RowBox[{"66.7", "/", "100"}], ",", 
+       RowBox[{"33.3", "/", "100"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"96.9", "/", "100"}], ",", 
+       RowBox[{"68.6", "/", "100"}], ",", 
+       RowBox[{"20.8", "/", "100"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"86.3", "/", "100"}], ",", 
+       RowBox[{"13.3", "/", "100"}], ",", 
+       RowBox[{"19.6", "/", "100"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"58.4", "/", "100"}], ",", 
+       RowBox[{"38.8", "/", "100"}], ",", 
+       RowBox[{"23.9", "/", "100"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"55.3", "/", "100"}], ",", 
+       RowBox[{"27.5", "/", "100"}], ",", 
+       RowBox[{"55.7", "/", "100"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"55.7", "/", "100"}], ",", 
+       RowBox[{"57.3", "/", "100"}], ",", 
+       RowBox[{"56.9", "/", "100"}]}], "]"}]}], "\[IndentingNewLine]", 
+    "}"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"apple10", "=", 
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"88", "/", "255"}], ",", 
+       RowBox[{"86", "/", "255"}], ",", 
+       RowBox[{"214", "/", "255"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"0", "/", "255"}], ",", 
+       RowBox[{"122", "/", "255"}], ",", 
+       RowBox[{"255", "/", "255"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"52", "/", "255"}], ",", 
+       RowBox[{"170", "/", "255"}], ",", 
+       RowBox[{"220", "/", "255"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"90", "/", "255"}], ",", 
+       RowBox[{"200", "/", "255"}], ",", 
+       RowBox[{"250", "/", "255"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"76", "/", "255"}], ",", 
+       RowBox[{"217", "/", "255"}], ",", 
+       RowBox[{"100", "/", "255"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"255", "/", "255"}], ",", 
+       RowBox[{"204", "/", "255"}], ",", 
+       RowBox[{"0", "/", "255"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"255", "/", "255"}], ",", 
+       RowBox[{"149", "/", "255"}], ",", 
+       RowBox[{"0", "/", "255"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"255", "/", "255"}], ",", 
+       RowBox[{"59", "/", "255"}], ",", 
+       RowBox[{"48", "/", "255"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"255", "/", "255"}], ",", 
+       RowBox[{"45", "/", "255"}], ",", 
+       RowBox[{"85", "/", "255"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"142", "/", "255"}], ",", 
+       RowBox[{"142", "/", "255"}], ",", 
+       RowBox[{"147", "/", "255"}]}], "]"}]}], "\[IndentingNewLine]", "}"}]}],
+   ";"}]], "Input"]
 }, Open  ]]
 }, Closed]],
 
@@ -498,10 +538,10 @@ Cell[BoxData[
 
 Cell["Enjoy!", "Title"]
 },
-WindowSize->{1440, 851},
+WindowSize->{1600, 851},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
 Visible->True,
-FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 25, \
+FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (April 11, \
 2016)",
 StyleDefinitions->"Default.nb"
 ]
@@ -548,59 +588,60 @@ Cell[3579, 150, 700, 18, 131, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[4316, 173, 304, 6, 194, "Subsection"],
-Cell[4623, 181, 1525, 37, 165, "Input"]
+Cell[4623, 181, 1447, 35, 165, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6185, 223, 153, 4, 94, "Subsection"],
-Cell[6341, 229, 494, 11, 97, "Input"]
+Cell[6107, 221, 153, 4, 94, "Subsection"],
+Cell[6263, 227, 494, 11, 97, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6872, 245, 308, 6, 194, "Subsection"],
-Cell[7183, 253, 1436, 38, 80, "Input"]
+Cell[6794, 243, 308, 6, 194, "Subsection"],
+Cell[7105, 251, 1436, 38, 80, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8656, 296, 165, 6, 44, "Subsection"],
-Cell[8824, 304, 1790, 55, 148, "Input"]
+Cell[8578, 294, 165, 6, 44, "Subsection"],
+Cell[8746, 302, 1578, 40, 165, "Input"],
+Cell[10327, 344, 2153, 55, 216, "Input"]
 }, Open  ]]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[10663, 365, 44, 0, 54, "Chapter"],
-Cell[10710, 367, 283, 6, 111, "Subtitle"],
-Cell[10996, 375, 215, 8, 81, "Subtitle"],
-Cell[11214, 385, 324, 12, 111, "Subtitle"]
+Cell[12529, 405, 44, 0, 54, "Chapter"],
+Cell[12576, 407, 283, 6, 111, "Subtitle"],
+Cell[12862, 415, 215, 8, 81, "Subtitle"],
+Cell[13080, 425, 324, 12, 111, "Subtitle"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[11575, 402, 32, 0, 54, "Chapter"],
+Cell[13441, 442, 32, 0, 54, "Chapter"],
 Cell[CellGroupData[{
-Cell[11632, 406, 269, 10, 63, "Subchapter"],
+Cell[13498, 446, 269, 10, 63, "Subchapter"],
 Cell[CellGroupData[{
-Cell[11926, 420, 36, 0, 44, "Subsection"],
-Cell[11965, 422, 217, 6, 28, "Input"]
+Cell[13792, 460, 36, 0, 44, "Subsection"],
+Cell[13831, 462, 217, 6, 28, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[12219, 433, 112, 3, 44, "Subsection"],
-Cell[12334, 438, 335, 7, 28, "Input"]
+Cell[14085, 473, 112, 3, 44, "Subsection"],
+Cell[14200, 478, 335, 7, 28, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[12706, 450, 139, 3, 44, "Subsection"],
-Cell[12848, 455, 83, 1, 28, "Input"]
+Cell[14572, 490, 139, 3, 44, "Subsection"],
+Cell[14714, 495, 83, 1, 28, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[12968, 461, 79, 0, 44, "Subsection"],
-Cell[13050, 463, 283, 6, 28, "Input"]
+Cell[14834, 501, 79, 0, 44, "Subsection"],
+Cell[14916, 503, 283, 6, 28, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[13370, 474, 105, 2, 44, "Subsection"],
-Cell[13478, 478, 199, 5, 28, "Input"]
+Cell[15236, 514, 105, 2, 44, "Subsection"],
+Cell[15344, 518, 199, 5, 28, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[13714, 488, 55, 0, 44, "Subsection"],
-Cell[13772, 490, 105, 2, 28, "Input"]
+Cell[15580, 528, 55, 0, 44, "Subsection"],
+Cell[15638, 530, 105, 2, 28, "Input"]
 }, Open  ]]
 }, Open  ]]
 }, Closed]]
 }, Open  ]],
-Cell[13928, 498, 23, 0, 92, "Title"]
+Cell[15794, 538, 23, 0, 92, "Title"]
 }
 ]
 *)
