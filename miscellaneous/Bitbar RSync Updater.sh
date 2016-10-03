@@ -15,8 +15,6 @@ REMOTE_DIR=" "
 LOCAL_DIR=" "
 SERVER_NAME=" "
 
-TIMESTAMP=`date "+%d/%m/%Y (%H:%M:%S)"`
-
 if [ "$1" == 'update' ]; then
     rsync --remove-source-files "$SYNC_SERVER":"$REMOTE_DIR"/* "$LOCAL_DIR"/ >& /dev/null
     rsync "$LOCAL_DIR"/Send/* "$SYNC_SERVER":"$REMOTE_DIR"/ >& /dev/null
@@ -27,4 +25,3 @@ fi
 echo "⇊ | size=22"
 echo '---'
 echo "$SERVER_NAME | terminal=false bash=$0 param1=update refresh=true"
-echo "Updated in $TIMESTAMP"
