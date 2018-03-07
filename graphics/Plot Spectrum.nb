@@ -10,17 +10,17 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     18927,        652]
-NotebookOptionsPosition[     16201,        552]
-NotebookOutlinePosition[     16573,        569]
-CellTagsIndexPosition[     16530,        566]
+NotebookDataLength[     25175,        726]
+NotebookOptionsPosition[     19373,        603]
+NotebookOutlinePosition[     19775,        621]
+CellTagsIndexPosition[     19732,        618]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["Plot Spectrum", "Title"],
+Cell["Plot Spectrum", "Title",ExpressionUUID->"83dba0b9-715d-4e2a-90df-92f0f80d6dcc"],
 
 Cell[TextData[{
  "A ",
@@ -29,24 +29,30 @@ Cell[TextData[{
  " Notebook to easily plot a spectrum from CSV files containing transition \
 energies and intensities (oscillator strengths), typically results from \
 Time-Dependent Quantum Chemistry calculations."
-}], "Subtitle"],
+}], "Subtitle",ExpressionUUID->"5c1d8407-7b89-4fcb-8178-0a0c9fb13009"],
 
 Cell["\<\
 Author Carlos Eduardo Vieira de Moura (carlosevmoura@iq.ufrj.br)\
-\>", "Subsubtitle"],
+\>", "Subsubtitle",ExpressionUUID->"4869e5d0-019e-4c63-898f-d9df75b02e50"],
 
 Cell[CellGroupData[{
 
-Cell["Definitions and Functions", "Chapter"],
+Cell["Definitions and Functions", "Chapter",
+ InitializationGroup->
+  True,ExpressionUUID->"1a186b08-0575-4e5c-ae39-29db9ab0dcae"],
 
 Cell[CellGroupData[{
 
 Cell["Working directory definition (You should define this one!)", \
-"Subsection"],
+"Subsection",
+ InitializationGroup->
+  True,ExpressionUUID->"b3698f43-7922-4929-9fa8-f2114b715d4f"],
 
 Cell[BoxData[
  RowBox[{"SetDirectory", "[", 
-  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input"]
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ InitializationGroup->
+  True,ExpressionUUID->"81efc1a5-b596-4962-86aa-2d6731852a9c"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -55,13 +61,17 @@ Cell[TextData[{
  StyleBox["DeleteHeader",
   FontWeight->"Bold"],
  ": Remove the reader from CSV file"
-}], "Subsection"],
+}], "Subsection",
+ InitializationGroup->
+  True,ExpressionUUID->"33aaf81a-b75f-444e-b4d3-76759af27e68"],
 
 Cell[BoxData[
  RowBox[{"DeleteHeader", ":=", 
   RowBox[{
    RowBox[{"Delete", "[", 
-    RowBox[{"#", ",", "1"}], "]"}], "&"}]}]], "Input"]
+    RowBox[{"#", ",", "1"}], "]"}], "&"}]}]], "Input",
+ InitializationGroup->
+  True,ExpressionUUID->"c16cbcdb-b065-4936-bbd7-6b7976165e6e"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -73,11 +83,15 @@ Cell[TextData[{
  StyleBox["x",
   FontWeight->"Bold"],
  " variable in the plot"
-}], "Subsection"],
+}], "Subsection",
+ InitializationGroup->
+  True,ExpressionUUID->"cd8dced0-c89d-4d14-a61e-a927477a8243"],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"StDev", "=", "0.15"}], ";"}]], "Input"]
+  RowBox[{"StDev", "=", "0.15"}], ";"}]], "Input",
+ InitializationGroup->
+  True,ExpressionUUID->"e946ce0b-91cd-4c8d-bdec-6811050de378"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -92,7 +106,9 @@ Cell[TextData[{
  StyleBox["x",
   FontWeight->"Bold"],
  " variable in the plot"
-}], "Subsection"],
+}], "Subsection",
+ InitializationGroup->
+  True,ExpressionUUID->"d06fab8b-51e2-4c9d-bb79-57c64f18fbe3"],
 
 Cell[BoxData[{
  RowBox[{"XMinGen", ":=", 
@@ -112,7 +128,9 @@ Cell[BoxData[{
       RowBox[{"#", "[", 
        RowBox[{"[", 
         RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}], "+", "1"}], "]"}], 
-   "&"}]}]}], "Input"]
+   "&"}]}]}], "Input",
+ InitializationGroup->
+  True,ExpressionUUID->"f2378242-440a-4cb2-af81-92c419afc0b9"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -123,7 +141,9 @@ Cell[TextData[{
  ": Generate an Gaussian Distribution upon a given transition\n\t#1: \
 Amplitude (Oscillator Strength)\n\t#2: Transition Energy\n\t#3: Standard \
 Deviation (StDev variable)\n\t#4: Dimension (Recommended: x)"
-}], "Subsection"],
+}], "Subsection",
+ InitializationGroup->
+  True,ExpressionUUID->"eaf4b377-4b52-4567-be7a-bd93a7114d8b"],
 
 Cell[BoxData[
  RowBox[{"PeakGen", ":=", 
@@ -136,7 +156,9 @@ Cell[BoxData[
     RowBox[{"(", 
      RowBox[{"#3", "*", 
       SqrtBox[
-       RowBox[{"2", "\[Pi]"}]]}], ")"}]}], "&"}]}]], "Input"]
+       RowBox[{"2", "\[Pi]"}]]}], ")"}]}], "&"}]}]], "Input",
+ InitializationGroup->
+  True,ExpressionUUID->"df585d6c-b483-4548-953f-a43e10fd8022"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -146,7 +168,9 @@ Cell[TextData[{
   FontWeight->"Bold"],
  ": \n\t#1: Dimension (Recommended: x)\n\t#2: Variable containing data from \
 CSV file\n\t#3: Standard Deviation (StDev variable)"
-}], "Subsection"],
+}], "Subsection",
+ InitializationGroup->
+  True,ExpressionUUID->"d9a0c76c-ce02-4872-ba09-d475cdf34351"],
 
 Cell[BoxData[
  RowBox[{"TotalPeaksGen", ":=", "\[IndentingNewLine]", 
@@ -166,7 +190,9 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{"i", ",", 
         RowBox[{"Length", "[", "#2", "]"}]}], "}"}]}], "\[IndentingNewLine]", 
-     "]"}], "\[IndentingNewLine]", "]"}], "&"}]}]], "Input"]
+     "]"}], "\[IndentingNewLine]", "]"}], "&"}]}]], "Input",
+ InitializationGroup->
+  True,ExpressionUUID->"7f4abdb2-c325-408f-8dca-cc0616b812ee"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -177,7 +203,9 @@ Cell[TextData[{
  ": \n\t#1: Variable containing data from CSV file\n\t#2: Standard Deviation \
 (StDev variable)\n\t#3: Minimum value for x axis in the plot\n\t#4: Maximum \
 value for x axis in the plot\n\t#5: Line color\n\t#6: Legends"
-}], "Subsection"],
+}], "Subsection",
+ InitializationGroup->
+  True,ExpressionUUID->"f3230da2-142a-4229-8c21-973bdf6a19ed"],
 
 Cell[BoxData[
  RowBox[{"PlotTotalPeaks", ":=", "\[IndentingNewLine]", 
@@ -218,7 +246,9 @@ Cell[BoxData[
        RowBox[{
         RowBox[{"SwatchLegend", "[", 
          RowBox[{"{", "#6", "}"}], "]"}], ",", "Above"}], "]"}]}]}], "]"}], 
-   "&"}]}]], "Input"]
+   "&"}]}]], "Input",
+ InitializationGroup->
+  True,ExpressionUUID->"7a2b1649-949d-4258-84b8-3a0da30b16e9"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -227,7 +257,9 @@ Cell[TextData[{
  StyleBox["ListPlotPeaks",
   FontWeight->"Bold"],
  ": \n\t#1: Variable containing data from CSV file\n\t#2: Line color"
-}], "Subsection"],
+}], "Subsection",
+ InitializationGroup->
+  True,ExpressionUUID->"b7350067-d31b-4651-abe4-e82a3d713e65"],
 
 Cell[BoxData[
  RowBox[{"ListPlotPeaks", ":=", "\[IndentingNewLine]", 
@@ -248,7 +280,9 @@ Cell[BoxData[
        RowBox[{
         RowBox[{"PointSize", "[", "Large", "]"}], ",", "#2"}], "]"}]}], ",", 
      "\[IndentingNewLine]", 
-     RowBox[{"ImageSize", "\[Rule]", "600"}]}], "]"}], "&"}]}]], "Input"]
+     RowBox[{"ImageSize", "\[Rule]", "600"}]}], "]"}], "&"}]}]], "Input",
+ InitializationGroup->
+  True,ExpressionUUID->"61413563-9f73-4555-b7e0-bc0fb75e6438"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -259,7 +293,9 @@ Cell[TextData[{
  ": \n\t#1: Variable containing data from CSV file\n\t#2: Standard Deviation \
 (StDev variable)\n\t#3: Minimum value for x axis in the plot\n\t#4: Maximum \
 value for x axis in the plot\n\t#5: Line color\n\t#6: Legends"
-}], "Subsection"],
+}], "Subsection",
+ InitializationGroup->
+  True,ExpressionUUID->"5f103bed-1744-42c7-be07-e04ec9da3eeb"],
 
 Cell[BoxData[
  RowBox[{"ManipulateSpectrum", ":=", 
@@ -299,7 +335,9 @@ Cell[BoxData[
        RowBox[{"{", 
         RowBox[{"StDevTest", ",", "0.2"}], "}"}], ",", "0.1", ",", "0.5", ",", 
        RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}]}], "]"}],
-    "&"}]}]], "Input"]
+    "&"}]}]], "Input",
+ InitializationGroup->
+  True,ExpressionUUID->"25d9ddac-f601-4ecb-b724-76fceceec2c8"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -310,7 +348,9 @@ Cell[TextData[{
  StyleBox["Mathematica",
   FontWeight->"Bold",
   FontSlant->"Italic"]
-}], "Subsection"],
+}], "Subsection",
+ InitializationGroup->
+  True,ExpressionUUID->"cf064469-1e33-4d61-b85e-48460a878075"],
 
 Cell[BoxData[
  RowBox[{
@@ -352,7 +392,9 @@ Cell[BoxData[
        RowBox[{"55.7", "/", "100"}], ",", 
        RowBox[{"57.3", "/", "100"}], ",", 
        RowBox[{"56.9", "/", "100"}]}], "]"}]}], "\[IndentingNewLine]", 
-    "}"}]}], ";"}]], "Input"],
+    "}"}]}], ";"}]], "Input",
+ InitializationGroup->
+  True,ExpressionUUID->"5ba881c3-31fd-44b7-9e46-9f9754bd9c47"],
 
 Cell[BoxData[
  RowBox[{
@@ -409,13 +451,15 @@ Cell[BoxData[
        RowBox[{"142", "/", "255"}], ",", 
        RowBox[{"142", "/", "255"}], ",", 
        RowBox[{"147", "/", "255"}]}], "]"}]}], "\[IndentingNewLine]", "}"}]}],
-   ";"}]], "Input"]
+   ";"}]], "Input",
+ InitializationGroup->
+  True,ExpressionUUID->"36f7ae9b-e6e5-419e-9170-1cccc847153e"]
 }, Open  ]]
 }, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["How to use this notebook?", "Chapter"],
+Cell["How to use this notebook?", "Chapter",ExpressionUUID->"8d8f6b8b-eb2a-46b5-a4fd-ade8f390c0a1"],
 
 Cell[TextData[{
  "1) Evaluate all cells contained in ",
@@ -423,7 +467,7 @@ Cell[TextData[{
   FontWeight->"Bold"],
  " Chapter\n\t- You can also copy this functions to other working notebook, \
 as you prefer;\n\t- Modifications can be made, according to your needs;"
-}], "Subtitle"],
+}], "Subtitle",ExpressionUUID->"eacf3e19-306f-4d41-97e5-957fae0266f5"],
 
 Cell[TextData[{
  "2) Import and save your data in a variable;\n\t- Use ",
@@ -433,7 +477,7 @@ Cell[TextData[{
  StyleBox["DeleteHeader",
   FontWeight->"Bold"],
  ";"
-}], "Subtitle"],
+}], "Subtitle",ExpressionUUID->"0059b4e0-e0b3-4cf5-8add-41bd8498b952"],
 
 Cell[TextData[{
  "3) Apply ",
@@ -447,12 +491,12 @@ Use ",
  StyleBox["Show",
   FontWeight->"Bold"],
  " function to show both plots together;"
-}], "Subtitle"]
+}], "Subtitle",ExpressionUUID->"354c1bd7-3719-4bab-9286-ce0e3e05f362"]
 }, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["Usage Example", "Chapter"],
+Cell["Usage Example", "Chapter",ExpressionUUID->"e65cc0e7-6a80-4551-aad5-e0730c44c992"],
 
 Cell[CellGroupData[{
 
@@ -464,13 +508,14 @@ Cell[TextData[{
   FormBox[
    RowBox[{
     SubscriptBox["C", "4"], 
-    SubscriptBox["H", "4"], "S"}], TraditionalForm]]],
+    SubscriptBox["H", "4"], "S"}], TraditionalForm]],ExpressionUUID->
+  "f9fab133-a1ba-4a8e-ae8a-eef2fd592e62"],
  " at TD-B3LYP level with 6-31+G* basis set"
-}], "Subchapter"],
+}], "Subchapter",ExpressionUUID->"ddeb2fa2-f7bc-4dcc-89f0-cc7157eb989f"],
 
 Cell[CellGroupData[{
 
-Cell["Importing data", "Subsection"],
+Cell["Importing data", "Subsection",ExpressionUUID->"6710a379-3787-4ffe-b01c-e468843291f6"],
 
 Cell[BoxData[
  RowBox[{"thiopheneData", "=", 
@@ -478,7 +523,8 @@ Cell[BoxData[
    RowBox[{"Import", "[", 
     RowBox[{
     "\"\<auxiliary files/thiophene-tddft.csv\>\"", ",", "\"\<CSV\>\""}], 
-    "]"}], "//", "DeleteHeader"}]}]], "Input"]
+    "]"}], "//", "DeleteHeader"}]}]], "Input",ExpressionUUID->"c63e95ee-ef18-\
+49b8-a983-54e164062ba2"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -486,7 +532,7 @@ Cell[CellGroupData[{
 Cell["\<\
 Plotting spectrum using XMinGen and XMaxGen to obtain automatically plot \
 borders\
-\>", "Subsection"],
+\>", "Subsection",ExpressionUUID->"42ad621f-4ae5-46d1-be8a-6d709addeaa3"],
 
 Cell[BoxData[
  RowBox[{"PlotTotalPeaks", "[", 
@@ -495,7 +541,8 @@ Cell[BoxData[
    RowBox[{"XMaxGen", "[", "thiopheneData", "]"}], ",", 
    RowBox[{"apple8", "[", 
     RowBox[{"[", "1", "]"}], "]"}], ",", 
-   "\"\<Thiophene (B3LYP/6-31+G*)\>\""}], "]"}]], "Input"]
+   "\"\<Thiophene (B3LYP/6-31+G*)\>\""}], "]"}]], "Input",ExpressionUUID->\
+"128c2e02-ced6-4f84-958f-f6f9d55cacff"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -503,15 +550,16 @@ Cell[CellGroupData[{
 Cell["\<\
 Use ManipulateSpectrum to choose best values for standard deviation and also \
 minimum and maximum for x axis\
-\>", "Subsection"],
+\>", "Subsection",ExpressionUUID->"cef45ab3-5b14-4011-a2b7-e568b6b47509"],
 
 Cell[BoxData[
- RowBox[{"ManipulateSpectrum", "[", "thiopheneData", "]"}]], "Input"]
+ RowBox[{"ManipulateSpectrum", "[", "thiopheneData", "]"}]], "Input",Expressio\
+nUUID->"87bb3db8-87ec-42ad-a86d-7ee09bd4a138"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["You can also apply PlotTotalPeaks setting values manually", "Subsection"],
+Cell["You can also apply PlotTotalPeaks setting values manually", "Subsection",ExpressionUUID->"7b63af6a-0886-4c1e-9f32-9c46a2f987f8"],
 
 Cell[BoxData[
  RowBox[{"thiophenePlot", "=", 
@@ -519,42 +567,46 @@ Cell[BoxData[
    RowBox[{"thiopheneData", ",", "0.08", ",", "5.0", ",", "9.0", ",", 
     RowBox[{"apple8", "[", 
      RowBox[{"[", "1", "]"}], "]"}], ",", 
-    "\"\<Thiophene (B3LYP/6-31+G*)\>\""}], "]"}]}]], "Input"]
+    "\"\<Thiophene (B3LYP/6-31+G*)\>\""}], "]"}]}]], "Input",ExpressionUUID->\
+"42ed5111-240a-4afc-81e0-6858f6f327cc"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["\<\
 Plotting peaks for a clear visualization of computational chemistry results\
-\>", "Subsection"],
+\>", "Subsection",ExpressionUUID->"fc4d971e-37dc-4730-8b3e-a05f732ee583"],
 
 Cell[BoxData[
  RowBox[{"thiophenePeaks", "=", 
   RowBox[{"ListPlotPeaks", "[", 
    RowBox[{"thiopheneData", ",", 
     RowBox[{"apple8", "[", 
-     RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}]], "Input"]
+     RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}]], "Input",ExpressionUUID->\
+"e74d92c5-cba3-4007-bd66-a7235d5b8958"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Showing both plots in one graphic", "Subsection"],
+Cell["Showing both plots in one graphic", "Subsection",ExpressionUUID->"6bd8349f-8900-4265-bbec-f4bff8e7b10e"],
 
 Cell[BoxData[
  RowBox[{"Show", "[", 
-  RowBox[{"thiophenePlot", ",", "thiophenePeaks"}], "]"}]], "Input"]
+  RowBox[{"thiophenePlot", ",", "thiophenePeaks"}], "]"}]], "Input",Expression\
+UUID->"c1f4a717-0d75-49ce-a843-73d210f70f07"]
 }, Open  ]]
 }, Open  ]]
 }, Closed]]
 }, Open  ]],
 
-Cell["Enjoy!", "Title"]
+Cell["Enjoy!", "Title",ExpressionUUID->"b08476d3-bd02-45d5-be32-72ab4ed7fa0d"]
 },
-WindowSize->{800, 851},
-WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+WindowSize->{1440, 851},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 Visible->True,
-FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (September \
-21, 2016)",
+TrackCellChangeTimes->False,
+FrontEndVersion->"11.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (September \
+10, 2017)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -569,91 +621,113 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 30, 0, 92, "Title"],
-Cell[613, 24, 286, 7, 111, "Subtitle"],
-Cell[902, 33, 95, 2, 29, "Subsubtitle"],
+Cell[580, 22, 85, 0, 98, "Title",ExpressionUUID->"83dba0b9-715d-4e2a-90df-92f0f80d6dcc"],
+Cell[668, 24, 341, 7, 85, "Subtitle",ExpressionUUID->"5c1d8407-7b89-4fcb-8178-0a0c9fb13009"],
+Cell[1012, 33, 150, 2, 31, "Subsubtitle",ExpressionUUID->"4869e5d0-019e-4c63-898f-d9df75b02e50"],
 Cell[CellGroupData[{
-Cell[1022, 39, 44, 0, 65, "Chapter"],
+Cell[1187, 39, 130, 2, 69, "Chapter",ExpressionUUID->"1a186b08-0575-4e5c-ae39-29db9ab0dcae",
+ InitializationGroup->True],
 Cell[CellGroupData[{
-Cell[1091, 43, 82, 1, 44, "Subsection"],
-Cell[1176, 46, 104, 2, 32, "Input"]
+Cell[1342, 45, 168, 3, 54, "Subsection",ExpressionUUID->"b3698f43-7922-4929-9fa8-f2114b715d4f",
+ InitializationGroup->True],
+Cell[1513, 50, 190, 4, 30, "Input",ExpressionUUID->"81efc1a5-b596-4962-86aa-2d6731852a9c",
+ InitializationGroup->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1317, 53, 119, 4, 44, "Subsection"],
-Cell[1439, 59, 138, 4, 32, "Input"]
+Cell[1740, 59, 205, 6, 54, "Subsection",ExpressionUUID->"33aaf81a-b75f-444e-b4d3-76759af27e68",
+ InitializationGroup->True],
+Cell[1948, 67, 224, 6, 30, "Input",ExpressionUUID->"c16cbcdb-b065-4936-bbd7-6b7976165e6e",
+ InitializationGroup->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1614, 68, 177, 7, 44, "Subsection"],
-Cell[1794, 77, 74, 2, 32, "Input"]
+Cell[2209, 78, 263, 9, 54, "Subsection",ExpressionUUID->"cd8dced0-c89d-4d14-a61e-a927477a8243",
+ InitializationGroup->True],
+Cell[2475, 89, 160, 4, 30, "Input",ExpressionUUID->"e946ce0b-91cd-4c8d-bdec-6811050de378",
+ InitializationGroup->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1905, 84, 225, 10, 44, "Subsection"],
-Cell[2133, 96, 525, 18, 54, "Input"]
+Cell[2672, 98, 311, 12, 54, "Subsection",ExpressionUUID->"d06fab8b-51e2-4c9d-bb79-57c64f18fbe3",
+ InitializationGroup->True],
+Cell[2986, 112, 611, 20, 52, "Input",ExpressionUUID->"f2378242-440a-4cb2-af81-92c419afc0b9",
+ InitializationGroup->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2695, 119, 285, 6, 144, "Subsection"],
-Cell[2983, 127, 342, 11, 40, "Input"]
+Cell[3634, 137, 371, 8, 162, "Subsection",ExpressionUUID->"eaf4b377-4b52-4567-be7a-bd93a7114d8b",
+ InitializationGroup->True],
+Cell[4008, 147, 428, 13, 38, "Input",ExpressionUUID->"df585d6c-b483-4548-953f-a43e10fd8022",
+ InitializationGroup->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3362, 143, 214, 5, 119, "Subsection"],
-Cell[3579, 150, 700, 18, 159, "Input"]
+Cell[4473, 165, 300, 7, 135, "Subsection",ExpressionUUID->"d9a0c76c-ce02-4872-ba09-d475cdf34351",
+ InitializationGroup->True],
+Cell[4776, 174, 786, 20, 157, "Input",ExpressionUUID->"7f4abdb2-c325-408f-8dca-cc0616b812ee",
+ InitializationGroup->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4316, 173, 304, 6, 194, "Subsection"],
-Cell[4623, 181, 1568, 39, 222, "Input"]
+Cell[5599, 199, 390, 8, 216, "Subsection",ExpressionUUID->"f3230da2-142a-4229-8c21-973bdf6a19ed",
+ InitializationGroup->True],
+Cell[5992, 209, 1654, 41, 199, "Input",ExpressionUUID->"7a2b1649-949d-4258-84b8-3a0da30b16e9",
+ InitializationGroup->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6228, 225, 153, 4, 94, "Subsection"],
-Cell[6384, 231, 753, 19, 138, "Input"]
+Cell[7683, 255, 239, 6, 108, "Subsection",ExpressionUUID->"b7350067-d31b-4651-abe4-e82a3d713e65",
+ InitializationGroup->True],
+Cell[7925, 263, 839, 21, 136, "Input",ExpressionUUID->"61413563-9f73-4555-b7e0-bc0fb75e6438",
+ InitializationGroup->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[7174, 255, 308, 6, 194, "Subsection"],
-Cell[7485, 263, 1436, 38, 117, "Input"]
+Cell[8801, 289, 394, 8, 216, "Subsection",ExpressionUUID->"5f103bed-1744-42c7-be07-e04ec9da3eeb",
+ InitializationGroup->True],
+Cell[9198, 299, 1522, 40, 94, "Input",ExpressionUUID->"25d9ddac-f601-4ecb-b724-76fceceec2c8",
+ InitializationGroup->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8958, 306, 165, 6, 44, "Subsection"],
-Cell[9126, 314, 1578, 40, 201, "Input"],
-Cell[10707, 356, 2153, 55, 264, "Input"]
+Cell[10757, 344, 251, 8, 54, "Subsection",ExpressionUUID->"cf064469-1e33-4d61-b85e-48460a878075",
+ InitializationGroup->True],
+Cell[11011, 354, 1664, 42, 199, "Input",ExpressionUUID->"5ba881c3-31fd-44b7-9e46-9f9754bd9c47",
+ InitializationGroup->True],
+Cell[12678, 398, 2239, 57, 262, "Input",ExpressionUUID->"36f7ae9b-e6e5-419e-9170-1cccc847153e",
+ InitializationGroup->True]
 }, Open  ]]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[12909, 417, 44, 0, 54, "Chapter"],
-Cell[12956, 419, 283, 6, 111, "Subtitle"],
-Cell[13242, 427, 215, 8, 81, "Subtitle"],
-Cell[13460, 437, 324, 12, 111, "Subtitle"]
+Cell[14966, 461, 99, 0, 58, "Chapter",ExpressionUUID->"8d8f6b8b-eb2a-46b5-a4fd-ade8f390c0a1"],
+Cell[15068, 463, 338, 6, 117, "Subtitle",ExpressionUUID->"eacf3e19-306f-4d41-97e5-957fae0266f5"],
+Cell[15409, 471, 270, 8, 85, "Subtitle",ExpressionUUID->"0059b4e0-e0b3-4cf5-8add-41bd8498b952"],
+Cell[15682, 481, 379, 12, 117, "Subtitle",ExpressionUUID->"354c1bd7-3719-4bab-9286-ce0e3e05f362"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[13821, 454, 32, 0, 54, "Chapter"],
+Cell[16098, 498, 87, 0, 58, "Chapter",ExpressionUUID->"e65cc0e7-6a80-4551-aad5-e0730c44c992"],
 Cell[CellGroupData[{
-Cell[13878, 458, 269, 10, 63, "Subchapter"],
+Cell[16210, 502, 382, 11, 65, "Subchapter",ExpressionUUID->"ddeb2fa2-f7bc-4dcc-89f0-cc7157eb989f"],
 Cell[CellGroupData[{
-Cell[14172, 472, 36, 0, 44, "Subsection"],
-Cell[14211, 474, 217, 6, 32, "Input"]
+Cell[16617, 517, 91, 0, 54, "Subsection",ExpressionUUID->"6710a379-3787-4ffe-b01c-e468843291f6"],
+Cell[16711, 519, 274, 7, 30, "Input",ExpressionUUID->"c63e95ee-ef18-49b8-a983-54e164062ba2"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[14465, 485, 112, 3, 44, "Subsection"],
-Cell[14580, 490, 335, 7, 32, "Input"]
+Cell[17022, 531, 167, 3, 54, "Subsection",ExpressionUUID->"42ad621f-4ae5-46d1-be8a-6d709addeaa3"],
+Cell[17192, 536, 392, 8, 30, "Input",ExpressionUUID->"128c2e02-ced6-4f84-958f-f6f9d55cacff"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[14952, 502, 139, 3, 44, "Subsection"],
-Cell[15094, 507, 83, 1, 32, "Input"]
+Cell[17621, 549, 194, 3, 54, "Subsection",ExpressionUUID->"cef45ab3-5b14-4011-a2b7-e568b6b47509"],
+Cell[17818, 554, 140, 2, 30, "Input",ExpressionUUID->"87bb3db8-87ec-42ad-a86d-7ee09bd4a138"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[15214, 513, 79, 0, 44, "Subsection"],
-Cell[15296, 515, 283, 6, 32, "Input"]
+Cell[17995, 561, 134, 0, 54, "Subsection",ExpressionUUID->"7b63af6a-0886-4c1e-9f32-9c46a2f987f8"],
+Cell[18132, 563, 340, 7, 30, "Input",ExpressionUUID->"42ed5111-240a-4afc-81e0-6858f6f327cc"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[15616, 526, 105, 2, 44, "Subsection"],
-Cell[15724, 530, 199, 5, 32, "Input"]
+Cell[18509, 575, 160, 2, 54, "Subsection",ExpressionUUID->"fc4d971e-37dc-4730-8b3e-a05f732ee583"],
+Cell[18672, 579, 256, 6, 30, "Input",ExpressionUUID->"e74d92c5-cba3-4007-bd66-a7235d5b8958"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[15960, 540, 55, 0, 44, "Subsection"],
-Cell[16018, 542, 105, 2, 32, "Input"]
+Cell[18965, 590, 110, 0, 54, "Subsection",ExpressionUUID->"6bd8349f-8900-4265-bbec-f4bff8e7b10e"],
+Cell[19078, 592, 162, 3, 30, "Input",ExpressionUUID->"c1f4a717-0d75-49ce-a843-73d210f70f07"]
 }, Open  ]]
 }, Open  ]]
 }, Closed]]
 }, Open  ]],
-Cell[16174, 550, 23, 0, 92, "Title"]
+Cell[19291, 601, 78, 0, 98, "Title",ExpressionUUID->"b08476d3-bd02-45d5-be32-72ab4ed7fa0d"]
 }
 ]
 *)
