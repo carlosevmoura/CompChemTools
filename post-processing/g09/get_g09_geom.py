@@ -94,11 +94,25 @@ def get_g09_geometry(_arguments, _g09_log):
             atoms_number = int(atoms_number)
             break
 
+    if 'atoms_number' not in locals():
+        print_script_output(
+            '> Number of atoms was not found in {} Gaussian09 output.'
+                .format(_arguments.g09_log_file),
+            'error')
+        sys.exit()
+
     if _arguments.cycle == 'opt':
         for line in range(len(_g09_log)):
             if 'Stationary point found' in _g09_log[line]:
                 stationary_line = line
                 break
+
+        if 'stationary_line' not in locals():
+            print_script_output(
+                '> Stationary point was not found in {} Gaussian09 output.'
+                    .format(_arguments.g09_log_file),
+                'error')
+            sys.exit()
 
         for line in range(stationary_line, len(_g09_log)):
             if format_start_string[_arguments.format] in _g09_log[line]:
@@ -114,11 +128,25 @@ def get_g09_geometry(_arguments, _g09_log):
                 start_line = line + 5
                 break
 
+        if 'start_line' not in locals():
+            print_script_output(
+                '> Cycle {} was not found in {} Gaussian09 output.'
+                    .format(_arguments.cycle, _arguments.g09_log_file),
+                'error')
+            sys.exit()
+
     elif _arguments.cycle < 0:
         for line in reversed(range(len(_g09_log))):
             if 'Step number' in _g09_log[line]:
                 total_cycles = int(_g09_log[line].strip().split()[2])
                 break
+
+        if _arguments.cycle + total_cycles < 0:
+            print_script_output(
+                '> Cycle {} was not found in {} cycles of {} Gaussian09 output.'
+                    .format(_arguments.cycle + total_cycles, total_cycles, _arguments.g09_log_file),
+                'error')
+            sys.exit()
 
         cycle_count = 0
         for line in range(len(_g09_log)):
