@@ -10,12 +10,12 @@
 ### From CompChemTools repository (https://github.com/carlosevmoura/CompChemTools)               ###
 ####################################################################################################
 #                                                                                                  #
-# Usage: get_g09_geom.py <LOG-FILE> -n <CYCLE> -f <ORIENTATION>                                    #
+# Usage: get_g09_geom.py <LOG-FILE> -n <STEP> -f <ORIENTATION>                                    #
 #                                                                                                  #
-# Cycle options:                                                                                   #
-#               . 'N':   Get geometry from cycle number N (positive integer number)                #
+# Step options:                                                                                   #
+#               . 'N':   Get geometry from step number N (positive integer number)                #
 #               . 'opt': Get the optimized geometry (default)                                      #
-#               . '-1':  Get the geometry of last optimization cycle                               #
+#               . '-1':  Get the geometry of last optimization step                               #
 #                                                                                                  #
 # Orientation options:                                                                             #
 #               . 'input' (default)                                                                #
@@ -47,24 +47,24 @@ def get_arguments():
 
     parser.add_argument('g09_log_file',
                         type=str,
-                        help='Gaussian Output File (usually .log extension)')
+                        help='gaussian09 output filename (usually .log extension)')
 
-    parser.add_argument('-n', dest='cycle',
+    parser.add_argument('-n', dest='step',
                         type=str,
                         default='opt',
-                        help='Number of the Optimization Cycle')
+                        help='number of the optimization step to be extracted')
 
     parser.add_argument('-f', dest='format',
                         type=str,
                         default='input',
                         choices=['input', 'standard', 'zmat'],
-                        help='Coordinates input format')
+                        help='cartesian coordinates format from gaussian09')
 
     args = parser.parse_args()
 
-    # Convert the number of cycles to integers
-    if args.cycle.lower() != 'opt':
-        args.cycle = int(args.cycle)
+    # Convert the number of steps to integers
+    if args.step.lower() != 'opt':
+        args.step = int(args.step)
 
     return args
 
@@ -101,7 +101,7 @@ def get_g09_geometry(_arguments, _g09_log):
             'error')
         sys.exit()
 
-    if _arguments.cycle == 'opt':
+    if _arguments.step == 'opt':
         for line in range(len(_g09_log)):
             if 'Stationary point found' in _g09_log[line]:
                 stationary_line = line
@@ -118,42 +118,42 @@ def get_g09_geometry(_arguments, _g09_log):
             if format_start_string[_arguments.format] in _g09_log[line]:
                 start_line = line + 5
 
-    elif _arguments.cycle >= 0:
-        cycle_count = 0
+    elif _arguments.step >= 0:
+        step_count = 0
         for line in range(len(_g09_log)):
             if format_start_string[_arguments.format] in _g09_log[line]:
-                cycle_count += 1
+                step_count += 1
 
-            if cycle_count > _arguments.cycle:
+            if step_count > _arguments.step:
                 start_line = line + 5
                 break
 
         if 'start_line' not in locals():
             print_script_output(
-                '> Cycle {} was not found in {} Gaussian09 output.'
-                    .format(_arguments.cycle, _arguments.g09_log_file),
+                '> Step {} was not found in {} Gaussian09 output.'
+                    .format(_arguments.step, _arguments.g09_log_file),
                 'error')
             sys.exit()
 
-    elif _arguments.cycle < 0:
+    elif _arguments.step < 0:
         for line in reversed(range(len(_g09_log))):
             if 'Step number' in _g09_log[line]:
-                total_cycles = int(_g09_log[line].strip().split()[2])
+                total_steps = int(_g09_log[line].strip().split()[2])
                 break
 
-        if _arguments.cycle + total_cycles < 0:
+        if _arguments.step + total_steps < 0:
             print_script_output(
-                '> Cycle {} was not found in {} cycles of {} Gaussian09 output.'
-                    .format(_arguments.cycle + total_cycles, total_cycles, _arguments.g09_log_file),
+                '> Step {} was not found in {} steps of {} Gaussian09 output.'
+                    .format(_arguments.step + total_steps, total_steps, _arguments.g09_log_file),
                 'error')
             sys.exit()
 
-        cycle_count = 0
+        step_count = 0
         for line in range(len(_g09_log)):
             if format_start_string[_arguments.format] in _g09_log[line]:
-                cycle_count += 1
+                step_count += 1
 
-            if cycle_count > _arguments.cycle + total_cycles:
+            if step_count > _arguments.step + total_steps:
                 start_line = line + 5
                 break
 
@@ -198,7 +198,7 @@ def write_xyz_geometry(_arguments, _g09_geometry):
         '115': 'Uup', '116': 'Lv', '117': 'Uus', '118': 'Uuo',  '-1': 'X', '-2': 'Tv' }
 
     geometry_filename = _arguments.g09_log_file
-    geometry_filename = geometry_filename.split('.')[0:-1][0] + '.' + str(_arguments.cycle) + '.xyz'
+    geometry_filename = geometry_filename.split('.')[0:-1][0] + '.' + str(_arguments.step) + '.xyz'
 
     with open(geometry_filename, 'w') as geometry_file:
         geometry_file.write('{}\n\n'.format(len(_g09_geometry)))
