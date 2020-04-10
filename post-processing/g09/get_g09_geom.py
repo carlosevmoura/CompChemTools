@@ -34,15 +34,24 @@ import sys
 import argparse
 #################################################
 
-## Function to print colored terminal messages
 def print_script_output(_text, _type):
+    """Function to print colored terminal messages
+
+    Arguments:
+        _text {str} -- Text to be printed
+        _type {str} -- Type of message
+    """
     if _type == 'error':
         print('\033[91m' + _text + '\033[m')
     elif _type == 'job_done':
         print('\033[92m' + _text + '\033[m')
 
-## Function to obtaing the arguments from terminal
 def get_arguments():
+    """Function to obtaing the arguments from Terminal
+
+    Returns:
+        obj:args -- arguments given by user
+    """
     parser = argparse.ArgumentParser()
 
     parser.add_argument('g09_log_file',
@@ -68,8 +77,15 @@ def get_arguments():
 
     return args
 
-## Function to read g09 Log File
 def open_g09_file(_arguments):
+    """Function to read g09 Log File
+
+    Arguments:
+        _arguments {obj} -- arguments given by user
+
+    Returns:
+        list:g09_log -- list containing g09 Log File as strings in lines
+    """
     if path.isfile(_arguments.g09_log_file):
         with open(_arguments.g09_log_file, 'rt') as file:
             g09_log = file.readlines()
@@ -80,8 +96,16 @@ def open_g09_file(_arguments):
             'error')
         sys.exit()
 
-## Function to obtaining g09 selected geometry
 def get_g09_geometry(_arguments, _g09_log):
+    """Function to obtaining g09 selected geometry
+
+    Arguments:
+        _arguments {obj} -- arguments from Terminal
+        _g09_log {list} -- variable containing g09 Log File as strings in lines
+
+    Returns:
+        list:_g09_log[start_line: start_line + atoms_number] -- strings of chosen geometry
+    """
     format_start_string = {
         'input': 'Input orientation:',
         'standard': 'Standard orientation:',
@@ -159,8 +183,16 @@ def get_g09_geometry(_arguments, _g09_log):
 
     return _g09_log[start_line: start_line + atoms_number]
 
-# Function to format g09 geometry
 def format_g09_geometry(_arguments, _g09_raw_geometry):
+    """Function to format g09 geometry
+
+    Arguments:
+        _arguments {obj} -- arguments given by user
+        _g09_raw_geometry {list} -- chosen geometry read from g09 log file
+
+    Returns:
+        list:geometry -- formatted geometry with splitted attributes
+    """
     atom = {}
     geometry = []
 
@@ -171,8 +203,13 @@ def format_g09_geometry(_arguments, _g09_raw_geometry):
 
     return geometry
 
-# Function to write the '.xyz' file
 def write_xyz_geometry(_arguments, _g09_geometry):
+    """Function to write the '.xyz' file
+    
+    Arguments:
+        _arguments {obj} -- arguments given by user
+        _g09_geometry {list} -- formmated geometry
+    """
 
     ## Defining dictionary from Atomic Numbers to Atomic Symbols
     atomic_numbers_dictionary = {
