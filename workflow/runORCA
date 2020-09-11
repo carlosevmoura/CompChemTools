@@ -1,0 +1,137 @@
+#!/usr/bin/env bash
+#
+# runORCA - A script to automate ORCA Quantum Chemistry Calculations
+# Author: Carlos E. V. de Moura, Ph.D. (https://github.com/carlosevmoura)
+# From CompChemTools repository (https://github.com/carlosevmoura/CompChemTools)
+#
+#/ Usage: runORCA [INPUT-FILE]
+#/
+#/ OPTIONS
+#/		'INPUT-FILE'
+#/			Input file name (file or folder) located at $orca_home/data_orca/input directory
+#/
+#/
+#/ ENVIRONMENT (Variables to be defined using 'export')
+#/		'$orca_dir'
+#/			Directory full path for Orca binaries
+#/
+#/		'$orca_home'
+#/			Home directory of $data_dir ('data_orca' folder)
+#/
+# runORCA Settings
+settings_orca() {
+
+	check_orca_dir() {
+		if [ -z ${orca_dir+x} ]; then
+			echo "Variable \$orca_dir unset. runORCA aborted."
+			exit 1
+		fi
+	}
+
+	## ORCA binaries directory
+	check_orca_dir
+
+	## Job date
+	job_date=$(date '+%y-%m-%d--%H-%M-%S')
+}
+
+# runORCA arguments
+get_arguments() {
+
+	get_orca_job() {
+		if [ -n "${1:-}" ]; then
+			orca_job="${1:-}"
+
+			### Checking if input exists
+			if [ -e $input_dir/$orca_job ]; then
+				job_list=($(ls $input_dir/$orca_job))
+			else
+				echo "Orca input file $orca_job not found. runORCA aborted."
+				exit 1
+			fi
+		else
+			echo "Orca input file unset. runORCA aborted."
+			exit 1
+		fi
+	}
+
+	## Get the input file(s)
+	get_orca_job "${@}"
+}
+
+# Folder structure settings
+build_folders_orca() {
+
+	check_orca_home() {
+		if [ -z ${orca_home+x} ]; then
+			echo "Variable \$orca_home unset. runORCA aborted."
+			exit 1
+		fi
+	}
+
+	make_folder_orca() {
+		### Creating the main directory
+		data_dir="$orca_home/data_orca"
+		mkdir -p "$data_dir"
+
+		### Creating secondary folder structure
+		input_dir="$data_dir/input"
+		output_dir="$data_dir/output"
+		mkdir -p "$input_dir" "$output_dir"
+	}
+
+	## Check $orca_home variable
+	check_orca_home
+
+	## Creating folder structure
+	make_folder_orca
+}
+
+# Running ORCA
+run_orca() {
+
+	## Creating workplace
+	mkdir -p "$output_dir/$orca_job" "$output_dir/$orca_job/$job_date"
+
+	## Preparation of input files
+	for job_item in ${job_list[@]}; do
+		if [ ${#job_list[@]} != 1 ]; then
+			job_item_dir=$output_dir/$orca_job/$job_date/$job_item
+			mkdir -p $job_item_dir
+			cp $input_dir/$orca_job/$job_item $job_item_dir/$job_item.inp
+		else
+			job_item=$orca_job
+			job_item_dir=$output_dir/$orca_job/$job_date
+			mkdir -p $job_item_dir
+			cp $input_dir/$job_item $job_item_dir/$job_item.inp
+		fi
+
+		### ORCA execution
+		cd $job_item_dir
+		$orca_dir/orca $job_item.inp >& $job_item.out && sleep 1
+	done
+}
+
+# runORCA main function
+main() {
+
+	echo "> Starting runORCA..."
+
+	## Setting up Orca package
+	settings_orca
+
+	## Building folder structure
+	build_folders_orca
+
+	## Obtaining script arguments
+	get_arguments "${@}"
+
+	## Run Orca
+	run_orca
+
+	echo "> runORCA execution finished! (Job: $orca_job) ($(date '+%d/%m/%y %H:%M:%S'))"
+}
+
+# Script running
+main "${@}"
+

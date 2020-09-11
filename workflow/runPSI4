@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+#
+# runPSI4 - A script to automate Psi4 Quantum Chemistry Calculations
+# Author: Carlos E. V. de Moura, Ph.D. (https://github.com/carlosevmoura)
+# From CompChemTools repository (https://github.com/carlosevmoura/CompChemTools)
+#
+#/ Usage: runPSI4 [INPUT-FILE]
+#/
+#/ OPTIONS
+#/		'INPUT-FILE'
+#/			Input file name (file or folder) located at $psi4_home/data_psi4/input directory
+#/
+#/
+#/ ENVIRONMENT (Variables to be defined using 'export')
+#/		'$psi4_home'
+#/			Home directory of $data_dir ('data_psi4' folder)
+#/
+# runPSI4 Settings
+settings_psi4() {
+
+	check_psi4_install() {
+
+        if ! python -c 'import pkgutil; exit(not pkgutil.find_loader("psi4"))'; then
+			echo "Psi3 installation not found. runPSI4 aborted."
+            exit 1
+        fi
+	}
+
+	## PSI4 installation
+	check_psi4_install
+
+	## Job date
+	job_date=$(date '+%y-%m-%d--%H-%M-%S')
+}
+
+# runPSI4 arguments
+get_arguments() {
+
+	get_psi4_job() {
+		if [ -n "${1:-}" ]; then
+			psi4_job="${1:-}"
+
+			### Checking if input exists
+			if [ -e $input_dir/$psi4_job ]; then
+				job_list=($(ls $input_dir/$psi4_job))
+			else
+				echo "Orca input file $psi4_job not found. runPSI4 aborted."
+				exit 1
+			fi
+		else
+			echo "Orca input file unset. runPSI4 aborted."
+			exit 1
+		fi
+	}
+
+	## Get the input file(s)
+	get_psi4_job "${@}"
+}
+
+# Folder structure settings
+build_folders_psi4() {
+
+	check_psi4_home() {
+		if [ -z ${psi4_home+x} ]; then
+			echo "Variable \$psi4_home unset. runPSI4 aborted."
+			exit 1
+		fi
+	}
+
+	make_folder_psi4() {
+		### Creating the main directory
+		data_dir="$psi4_home/data_psi4"
+		mkdir -p "$data_dir"
+
+		### Creating secondary folder structure
+		input_dir="$data_dir/input"
+		output_dir="$data_dir/output"
+		mkdir -p "$input_dir" "$output_dir"
+	}
+
+	## Check $psi4_home variable
+	check_psi4_home
+
+	## Creating folder structure
+	make_folder_psi4
+}
+
+# Running PSI4
+run_psi4() {
+
+	## Creating workplace
+	mkdir -p "$output_dir/$psi4_job" "$output_dir/$psi4_job/$job_date"
+
+	## Preparation of input files
+	for job_item in ${job_list[@]}; do
+		if [ ${#job_list[@]} != 1 ]; then
+			job_item_dir=$output_dir/$psi4_job/$job_date/$job_item
+			mkdir -p $job_item_dir
+			cp $input_dir/$psi4_job/$job_item $job_item_dir/$job_item.py
+		else
+			job_item=$psi4_job
+			job_item_dir=$output_dir/$psi4_job/$job_date
+			mkdir -p $job_item_dir
+			cp $input_dir/$job_item $job_item_dir/$job_item.py
+		fi
+
+		### PSI4 execution
+		cd $job_item_dir
+		python3 $job_item.py >& $job_item.out && sleep 1
+	done
+}
+
+# runPSI4 main function
+main() {
+
+	echo "> Starting runPSI4..."
+
+	## Setting up Orca package
+	settings_psi4
+
+	## Building folder structure
+	build_folders_psi4
+
+	## Obtaining script arguments
+	get_arguments "${@}"
+
+	## Run Orca
+	run_psi4
+
+	echo "> runPSI4 execution finished! (Job: $psi4_job) ($(date '+%d/%m/%y %H:%M:%S'))"
+}
+
+# Script running
+main "${@}"
+
