@@ -44,7 +44,12 @@ get_arguments() {
 
 			### Checking if input exists
 			if [ -e $input_dir/$orca_job ]; then
-				job_list=($(ls $input_dir/$orca_job))
+				if [[ "$OSTYPE" == "darwin"* ]]; then
+					IFS=$'\n'
+					job_list=($(ls -1 "$input_dir/$orca_job"))
+				else
+					job_list=($(ls "$input_dir/$orca_job"))
+				fi
 			else
 				echo "Orca input file $orca_job not found. runORCA aborted."
 				exit 1
@@ -96,12 +101,12 @@ run_orca() {
 	## Preparation of input files
 	for job_item in ${job_list[@]}; do
 		if [ ${#job_list[@]} != 1 ]; then
-			job_basename="${$job_item%.*}"
+			job_basename="${job_item%.*}"
 			job_dir=$output_dir/$orca_job/$job_date/$job_basename
 			mkdir -p $job_dir
 			cp $input_dir/$orca_job/$job_item $job_item_dir/$job_basename.inp
 		else
-			job_basename="${$job_item%.*}"
+			job_basename="${job_item%.*}"
 			job_dir=$output_dir/$job_basename/$job_date
 			mkdir -p $job_dir
 			cp $input_dir/$job_item $job_dir/$job_basename.inp
