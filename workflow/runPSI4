@@ -20,8 +20,8 @@ settings_psi4() {
 
 	check_psi4_install() {
 
-        if ! python -c 'import pkgutil; exit(not pkgutil.find_loader("psi4"))'; then
-			echo "Psi3 installation not found. runPSI4 aborted."
+        if ! python3 -c 'import pkgutil; exit(not pkgutil.find_loader("psi4"))'; then
+			echo "Psi4 installation not found. runPSI4 aborted."
             exit 1
         fi
 	}
@@ -44,11 +44,11 @@ get_arguments() {
 			if [ -e $input_dir/$psi4_job ]; then
 				job_list=($(ls $input_dir/$psi4_job))
 			else
-				echo "Orca input file $psi4_job not found. runPSI4 aborted."
+				echo "Psi4 input file $psi4_job not found. runPSI4 aborted."
 				exit 1
 			fi
 		else
-			echo "Orca input file unset. runPSI4 aborted."
+			echo "Psi4 input file unset. runPSI4 aborted."
 			exit 1
 		fi
 	}
@@ -94,19 +94,20 @@ run_psi4() {
 	## Preparation of input files
 	for job_item in ${job_list[@]}; do
 		if [ ${#job_list[@]} != 1 ]; then
-			job_item_dir=$output_dir/$psi4_job/$job_date/$job_item
-			mkdir -p $job_item_dir
-			cp $input_dir/$psi4_job/$job_item $job_item_dir/$job_item.py
+			job_basename="${$job_item%.*}"
+			job_dir=$output_dir/$psi4_job/$job_date/$job_basename
+			mkdir -p $job_dir
+			cp $input_dir/$psi4_job/$job_item $job_dir/$job_basename.py
 		else
-			job_item=$psi4_job
-			job_item_dir=$output_dir/$psi4_job/$job_date
-			mkdir -p $job_item_dir
-			cp $input_dir/$job_item $job_item_dir/$job_item.py
+			job_basename="${$job_item%.*}"
+			job_dir=$output_dir/$job_basename/$job_date
+			mkdir -p $job_dir
+			cp $input_dir/$job_item $job_dir/$job_basename.py
 		fi
 
 		### PSI4 execution
 		cd $job_item_dir
-		python3 $job_item.py >& $job_item.out && sleep 1
+		python3 $job_basename.py >& $job_basename.out && sleep 1
 	done
 }
 
@@ -115,7 +116,7 @@ main() {
 
 	echo "> Starting runPSI4..."
 
-	## Setting up Orca package
+	## Setting up Psi4 package
 	settings_psi4
 
 	## Building folder structure
@@ -124,7 +125,7 @@ main() {
 	## Obtaining script arguments
 	get_arguments "${@}"
 
-	## Run Orca
+	## Run Psi4
 	run_psi4
 
 	echo "> runPSI4 execution finished! (Job: $psi4_job) ($(date '+%d/%m/%y %H:%M:%S'))"

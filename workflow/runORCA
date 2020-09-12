@@ -96,19 +96,20 @@ run_orca() {
 	## Preparation of input files
 	for job_item in ${job_list[@]}; do
 		if [ ${#job_list[@]} != 1 ]; then
-			job_item_dir=$output_dir/$orca_job/$job_date/$job_item
-			mkdir -p $job_item_dir
-			cp $input_dir/$orca_job/$job_item $job_item_dir/$job_item.inp
+			job_basename="${$job_item%.*}"
+			job_dir=$output_dir/$orca_job/$job_date/$job_basename
+			mkdir -p $job_dir
+			cp $input_dir/$orca_job/$job_item $job_item_dir/$job_basename.inp
 		else
-			job_item=$orca_job
-			job_item_dir=$output_dir/$orca_job/$job_date
-			mkdir -p $job_item_dir
-			cp $input_dir/$job_item $job_item_dir/$job_item.inp
+			job_basename="${$job_item%.*}"
+			job_dir=$output_dir/$job_basename/$job_date
+			mkdir -p $job_dir
+			cp $input_dir/$job_item $job_dir/$job_basename.inp
 		fi
 
 		### ORCA execution
-		cd $job_item_dir
-		$orca_dir/orca $job_item.inp >& $job_item.out && sleep 1
+		cd $job_dir
+		$orca_dir/orca $job_basename.inp >& $job_basename.out && sleep 1
 	done
 }
 
