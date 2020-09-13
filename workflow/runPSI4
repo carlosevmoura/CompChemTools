@@ -41,7 +41,7 @@ get_arguments() {
 			psi4_job="${1:-}"
 
 			### Checking if input exists
-			if [ -e $input_dir/$psi4_job ]; then
+			if [ -e "$input_dir/$psi4_job" ]; then
 				if [[ "$OSTYPE" == "darwin"* ]]; then
 					IFS=$'\n'
 					job_list=($(ls -1 "$input_dir/$psi4_job"))
@@ -100,18 +100,18 @@ run_psi4() {
 	for job_item in ${job_list[@]}; do
 		if [ ${#job_list[@]} != 1 ]; then
 			job_basename="${job_item%.*}"
-			job_dir=$output_dir/$psi4_job/$job_date/$job_basename
-			mkdir -p $job_dir
-			cp $input_dir/$psi4_job/$job_item $job_dir/$job_basename.py
+			job_dir="$output_dir/$psi4_job/$job_date/$job_basename"
+			mkdir -p "$job_dir"
+			cp "$input_dir/$psi4_job/$job_item" "$job_dir/$job_basename.py"
 		else
 			job_basename="${job_item%.*}"
-			job_dir=$output_dir/$job_basename/$job_date
-			mkdir -p $job_dir
-			cp $input_dir/$job_item $job_dir/$job_basename.py
+			job_dir="$output_dir/$job_basename/$job_date"
+			mkdir -p "$job_dir"
+			cp "$input_dir/$job_item" "$job_dir/$job_basename.py"
 		fi
 
 		### PSI4 execution
-		cd $job_item_dir
+		cd "$job_dir"
 		python3 $job_basename.py >& $job_basename.out && sleep 1
 	done
 }
