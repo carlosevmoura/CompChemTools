@@ -45,8 +45,10 @@ get_arguments() {
 				if [[ "$OSTYPE" == "darwin"* ]]; then
 					IFS=$'\n'
 					job_list=($(ls -1 "$input_dir/$psi4_job" | sed 's/.*\///'))
-				else
+                elif [[ `hostnamectl | grep "Ubuntu"` ]]; then
 					job_list=($(ls "$input_dir/$psi4_job"))
+				else
+					job_list=($(ls -1 "$input_dir/$psi4_job" | sed 's/.*\///'))
 				fi
 			else
 				echo "Psi4 input file $psi4_job not found. runPSI4 aborted."

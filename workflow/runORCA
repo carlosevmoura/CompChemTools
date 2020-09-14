@@ -47,8 +47,10 @@ get_arguments() {
 				if [[ "$OSTYPE" == "darwin"* ]]; then
 					IFS=$'\n'
 					job_list=($(ls -1 "$input_dir/$orca_job" | sed 's/.*\///'))
-				else
+                elif [[ `hostnamectl | grep "Ubuntu"` ]]; then
 					job_list=($(ls "$input_dir/$orca_job"))
+				else
+					job_list=($(ls -1 "$input_dir/$orca_job" | sed 's/.*\///'))
 				fi
 			else
 				echo "Orca input file $orca_job not found. runORCA aborted."
