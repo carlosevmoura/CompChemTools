@@ -44,7 +44,7 @@ get_arguments() {
 			if [ -e "$input_dir/$psi4_job" ]; then
 				if [[ "$OSTYPE" == "darwin"* ]]; then
 					IFS=$'\n'
-					job_list=($(ls -1 "$input_dir/$psi4_job"))
+					job_list=($(ls -1 "$input_dir/$psi4_job" | sed 's/.*\///'))
 				else
 					job_list=($(ls "$input_dir/$psi4_job"))
 				fi

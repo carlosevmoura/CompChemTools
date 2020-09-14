@@ -22,7 +22,7 @@
 settings_orca() {
 
 	check_orca_dir() {
-		if [ -z ${orca_dir+x} ]; then
+		if [ -z "${orca_dir+x}" ]; then
 			echo "Variable \$orca_dir unset. runORCA aborted."
 			exit 1
 		fi
@@ -43,10 +43,10 @@ get_arguments() {
 			orca_job="${1:-}"
 
 			### Checking if input exists
-			if [ -e $input_dir/$orca_job ]; then
+			if [ -e "$input_dir/$orca_job" ]; then
 				if [[ "$OSTYPE" == "darwin"* ]]; then
 					IFS=$'\n'
-					job_list=($(ls -1 "$input_dir/$orca_job"))
+					job_list=($(ls -1 "$input_dir/$orca_job" | sed 's/.*\///'))
 				else
 					job_list=($(ls "$input_dir/$orca_job"))
 				fi
@@ -68,7 +68,7 @@ get_arguments() {
 build_folders_orca() {
 
 	check_orca_home() {
-		if [ -z ${orca_home+x} ]; then
+		if [ -z "${orca_home+x}" ]; then
 			echo "Variable \$orca_home unset. runORCA aborted."
 			exit 1
 		fi
@@ -104,7 +104,7 @@ run_orca() {
 			job_basename="${job_item%.*}"
 			job_dir="$output_dir/$orca_job/$job_date/$job_basename"
 			mkdir -p "$job_dir"
-			cp "$input_dir/$orca_job/$job_item" "$job_item_dir/$job_basename.inp"
+			cp "$input_dir/$orca_job/$job_item" "$job_dir/$job_basename.inp"
 		else
 			job_basename="${job_item%.*}"
 			job_dir="$output_dir/$job_basename/$job_date"
@@ -114,7 +114,7 @@ run_orca() {
 
 		### ORCA execution
 		cd "$job_dir"
-		$orca_dir/orca $job_basename.inp >& $job_basename.out && sleep 1
+		"$orca_dir"/orca $job_basename.inp >& $job_basename.out && sleep 1
 	done
 }
 
