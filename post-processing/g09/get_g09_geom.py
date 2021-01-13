@@ -10,12 +10,12 @@
 ### From CompChemTools repository (https://github.com/carlosevmoura/CompChemTools)               ###
 ####################################################################################################
 #                                                                                                  #
-# Usage: get_g09_geom.py <LOG-FILE> -n <STEP> -f <ORIENTATION>                                    #
+# Usage: get_g09_geom.py <LOG-FILE> -n <STEP> -f <ORIENTATION>                                     #
 #                                                                                                  #
-# Step options:                                                                                   #
-#               . 'N':   Get geometry from step number N (positive integer number)                #
+# Step options:                                                                                    #
+#               . 'N':   Get geometry from step number N (positive integer number)                 #
 #               . 'opt': Get the optimized geometry (default)                                      #
-#               . '-1':  Get the geometry of last optimization step                               #
+#               . '-1':  Get the geometry of last optimization step                                #
 #                                                                                                  #
 # Orientation options:                                                                             #
 #               . 'input' (default)                                                                #

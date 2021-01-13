@@ -1,0 +1,166 @@
+#!/usr/bin/env bash
+#
+# runGAUSSIAN - A script to automate GAUSSIAN Quantum Chemistry Calculations
+# Author: Carlos E. V. de Moura, Ph.D. (https://github.com/carlosevmoura)
+# From CompChemTools repository (https://github.com/carlosevmoura/CompChemTools)
+#
+#/ Usage: runGAUSSIAN [INPUT-FILE]
+#/
+#/ OPTIONS
+#/		'INPUT-FILE'
+#/			Input file name (file or folder) located at $gaussian_home/data_gaussian/input directory
+#/
+#/
+#/ ENVIRONMENT (Variables to be defined using 'export')
+#/		'$gaussian_dir'
+#/			Directory full path for Gaussian binaries
+#/
+#/		'$gaussian_home'
+#/			Home directory of $data_dir ('data_gaussian' folder)
+#/
+# runGAUSSIAN Settings
+settings_gaussian() {
+
+	check_gaussian_dir() {
+		if [ -z "${gaussian_dir+x}" ]; then
+			echo "Variable \$gaussian_dir unset. runGAUSSIAN aborted."
+			exit 1
+		fi
+	}
+
+    setting_gaussian_env() {
+        export GAUSS_EXEDIR="$gaussian_dir/bsd:$gaussian_dir/local:$gaussian_dir/extras:$gaussian_dir"
+        export GAUSS_ARCHDIR="$gaussian_dir/arch"
+        export PATH="${PATH}:$GAUSS_EXEDIR"
+        export GAUSS_SCRDIR="$gaussian_home/scr/gaussian"
+        mkdir -m 777 -p "$GAUSS_SCRDIR"
+    }
+
+	## GAUSSIAN binaries directory
+	check_gaussian_dir
+
+	## GAUSSIAN environment setup
+	setting_gaussian_env
+
+	## Job date
+	job_date=$(date '+%y-%m-%d--%H-%M-%S')
+}
+
+# runGAUSSIAN arguments
+get_arguments() {
+
+	get_gaussian_job() {
+		if [ -n "${1:-}" ]; then
+			gaussian_job="${1:-}"
+
+			### Checking if input exists
+			if [ -e "$input_dir/$gaussian_job" ]; then
+				if [[ "$OSTYPE" == "darwin"* ]]; then
+					IFS=$'\n'
+					job_list=($(ls -1 "$input_dir/$gaussian_job" | sed 's/.*\///'))
+                elif [[ `hostnamectl | grep "Ubuntu"` ]]; then
+					job_list=($(ls "$input_dir/$gaussian_job"))
+				else
+					job_list=($(ls -1 "$input_dir/$gaussian_job" | sed 's/.*\///'))
+				fi
+			else
+				echo "Gaussian input file $gaussian_job not found. runGAUSSIAN aborted."
+				exit 1
+			fi
+		else
+			echo "Gaussian input file unset. runGAUSSIAN aborted."
+			exit 1
+		fi
+	}
+
+	## Get the input file(s)
+	get_gaussian_job "${@}"
+}
+
+# Folder structure settings
+build_folders_gaussian() {
+
+	check_gaussian_home() {
+		if [ -z "${gaussian_home+x}" ]; then
+			echo "Variable \$gaussian_home unset. runGAUSSIAN aborted."
+			exit 1
+		fi
+	}
+
+	make_folder_gaussian() {
+		### Creating the main directory
+		data_dir="$gaussian_home/data_gaussian"
+		mkdir -p "$data_dir"
+
+		### Creating secondary folder structure
+		input_dir="$data_dir/input"
+		output_dir="$data_dir/output"
+		mkdir -p "$input_dir" "$output_dir"
+	}
+
+	## Check $gaussian_home variable
+	check_gaussian_home
+
+	## Creating folder structure
+	make_folder_gaussian
+}
+
+# Running GAUSSIAN
+run_gaussian() {
+
+	## Creating workplace
+	mkdir -p "$output_dir/$gaussian_job" "$output_dir/$gaussian_job/$job_date"
+
+	## Preparation of input files
+	for job_item in ${job_list[@]}; do
+		if [ ${#job_list[@]} != 1 ]; then
+			job_basename="${job_item%.*}"
+			job_dir="$output_dir/$gaussian_job/$job_date/$job_basename"
+			mkdir -p "$job_dir"
+			cp "$input_dir/$gaussian_job/$job_item" "$job_dir/$job_basename.com"
+		else
+			job_basename="${job_item%.*}"
+			job_dir="$output_dir/$job_basename/$job_date"
+			mkdir -p "$job_dir"
+			cp "$input_dir/$job_item" "$job_dir/$job_basename.com"
+		fi
+
+		### GAUSSIAN execution
+		cd "$job_dir"
+		"$gaussian_dir"/g09 $job_basename.com && sleep 1
+	done
+}
+
+# Cleaning Temporary Files
+clean_scr() {
+    rm -f ".t0$job_basename" ".t1$job_basename" ".t2$job_basename"
+    rm -f "$GAUSS_SCRDIR/Gau*"
+    rm -f "events"
+}
+
+# runGAUSSIAN main function
+main() {
+
+	echo "> Starting runGAUSSIAN..."
+
+	## Setting up Gaussian package
+	settings_gaussian
+
+	## Building folder structure
+	build_folders_gaussian
+
+	## Obtaining script arguments
+	get_arguments "${@}"
+
+	## Run Gaussian
+	run_gaussian
+
+    ## Cleaning Temporary Files
+    clean_scr
+
+	echo "> runGAUSSIAN execution finished! (Job: $gaussian_job) ($(date '+%d/%m/%y %H:%M:%S'))"
+}
+
+# Script running
+main "${@}"
+
