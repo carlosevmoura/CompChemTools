@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+#
+# jobPID - A script to register the PID number of a process in Terminal as a text file
+# Author: Carlos E. V. de Moura, Ph.D. (https://github.com/carlosevmoura)
+# From CompChemTools repository (https://github.com/carlosevmoura/CompChemTools)
+#
+#/ Usage: jobPID [COMMAND]
+#/
+#/ OPTIONS
+#/		'COMMAND'
+#/			Command to be runned in the BASH Terminal
+#/
+# Getting Arguments
+get_arguments() {
+
+	get_terminal_command() {
+		if [ -n "${1:-}" ]; then
+			terminal_command="$*"
+		else
+			echo "Terminal command unset. jobPID aborted."
+			exit 1
+		fi
+	}
+
+	## Get the Terminal command
+	get_terminal_command "${@}"
+}
+
+# Running jobPID
+run_jobPID() {
+    pid_file='job.pid'
+    ((${terminal_command}) & jobs -p >${pid_file})
+}
+
+# jobPID main function
+main() {
+	## Obtaining script arguments
+	get_arguments "${@}"
+
+	## Run Terminal Command
+	run_jobPID
+}
+
+# Script running
+main "${@}"
