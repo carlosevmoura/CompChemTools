@@ -22,6 +22,8 @@
 #################################################
 ##      Operating System Interfaces Module     ##
 from os import path
+##   System-specific parameters and functions  ##
+import sys
 ##       Parser for command-line options       ##
 import argparse
 #################################################
