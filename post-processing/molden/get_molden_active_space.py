@@ -97,7 +97,7 @@ def format_molden_file(_raw_file):
         for line_number, line in enumerate(mo_raw_data):
             if "Occup=" in line:
                 mo_occup = float(line.strip().split()[1])
-                if (mo_occup < 2.000000) and (mo_occup > 0.000001):
+                if (mo_occup < 1.999999) and (mo_occup > 0.000001):
                     cas_mos_data.extend(mo_raw_data)
 
     return molden_header, cas_mos_data
